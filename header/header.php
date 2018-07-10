@@ -1,3 +1,7 @@
+<?php
+    include_once("class/db/db.php");
+    $db = new DB();
+?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -41,8 +45,8 @@
                     </div>
                 </form>
 
-                <!-- <ul class="top-nav">
-                    <li class="hidden-xl-up"><a href="" data-sa-action="search-open"><i class="zmdi zmdi-search"></i></a></li>
+               <ul class="top-nav">
+                     <!-- <li class="hidden-xl-up"><a href="" data-sa-action="search-open"><i class="zmdi zmdi-search"></i></a></li>
 
                     <li class="dropdown">
                         <a href="" data-toggle="dropdown" class="top-nav__notify"><i class="zmdi zmdi-email"></i></a>
@@ -316,12 +320,12 @@
                             <a href="" class="dropdown-item">Clear Local Storage</a>
                             <a href="" class="dropdown-item">Settings</a>
                         </div>
-                    </li>
+                    </li> -->
 
                     <li class="hidden-xs-down">
                         <a href="" class="top-nav__themes" data-sa-action="aside-open" data-sa-target=".themes"><i class="zmdi zmdi-palette"></i></a>
                     </li>
-                </ul> -->
+                </ul>
 
                 <div class="clock hidden-md-down">
                     <div class="time">
@@ -352,9 +356,30 @@
                     </div>
 
                     <ul class="navigation">
-                        <li class="navigation__active"><a href="index.html"><i class="zmdi zmdi-home"></i> Home</a></li>
+                        <li class="navigation__active"><a href="index.php"><i class="zmdi zmdi-home"></i> Home</a></li>
 
-                        <li class="navigation__sub @@variantsactive">
+                        <?php
+                            $SqlMenuRoot = "select * from menu where idPadre='0'";
+                            $MenuRoot = $db->select($SqlMenuRoot);
+                            $MenuHTML = "";
+                            foreach($MenuRoot as $Root){
+                                $MenuHTML .= "<li class='navigation__sub @@".$Root["Descripcion"]."'>";
+                                    $MenuHTML .= "<a href=''><i class='".$Root["Logo"]."'></i> ".$Root["Descripcion"]."</a>";
+                                    $SqlMenuChild = "select * from menu where idPadre='".$Root["id"]."'";
+                                    $MenuChild = $db->select($SqlMenuChild);
+                                    if(count($MenuChild) > 0){
+                                        $MenuHTML .= "<ul>";
+                                            foreach($MenuChild as $Child){
+                                                $MenuHTML .= "<li class='@@".$Child["id"]."'><a href='hidden-sidebar.html'>".$Child["Descripcion"]."</a></li>";
+                                            }
+                                        $MenuHTML .= "</ul>";
+                                    }
+                                $MenuHTML .= "</li>";
+                            }
+                            echo $MenuHTML;
+                        ?>
+
+                        <!-- <li class="navigation__sub @@variantsactive">
                             <a href=""><i class="zmdi zmdi-view-week"></i> Variants</a>
 
                             <ul>
@@ -463,7 +488,7 @@
                                 <li class="@@lockscreenactive"><a href="404.html">404</a></li>
                                 <li class="@@emptyactive"><a href="empty.html">Empty Page</a></li>
                             </ul>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </aside>
