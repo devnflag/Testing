@@ -4,6 +4,7 @@
     require("/var/www/html/class/agi/phpagi.php");
 
     $agi = new AGI();
-    $agi->set_variable(test,"PRUEBA");
+    $Anexo = $argv[1];
+    $agi->set_variable(test,"1");
 
 ?>
