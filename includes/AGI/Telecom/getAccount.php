@@ -19,7 +19,7 @@
                     WHERE
                         Ex.Extension='".$Anexo."'";
     $Tiempo = $Connection->query($SqlTiempo);
-    $agi->set_variable(test,$Tiempo);
+    $agi->set_variable(test,$SqlTiempo);
     /*if(count($Tiempo) > 0){
         $Minutos = $Tiempo["Minutos"];
         $Segundos = $Tiempo["Segundos"];
