@@ -2,10 +2,10 @@
 <?php
 
     require("/var/www/html/class/agi/phpagi.php");
-    //require("/var/www/html/class/db/DB.php");
+    include_once("/var/www/html/class/db/DB.php");
 
     $agi = new AGI();
-    //$db = new DB();
+    $db = new DB();
 
     $Anexo = $argv[1];
     $Exten = $argv[2];
