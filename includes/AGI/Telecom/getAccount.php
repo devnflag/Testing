@@ -2,7 +2,13 @@
 <?php
 
     require("/var/www/html/class/agi/phpagi.php");
-    include_once("/var/www/html/includes/AGI/db/DB.php");
+    //include_once("/var/www/html/includes/AGI/db/DB.php");
+
+    $Connection = new mysqli("localhost", "root", "nflag.,2112", "nflag");
+    if (mysqli_connect_errno()) {
+        printf("Error de conexión: %s\n", mysqli_connect_error());
+        exit();
+    }
 
     $agi = new AGI();
 
