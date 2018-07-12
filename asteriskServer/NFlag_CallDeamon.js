@@ -15,7 +15,7 @@ var port = process.env.PORT || 65530
 http.listen(port);
 require('events').EventEmitter.defaultMaxListeners = Infinity;
 
-ami.on('eventNewstate', function(data){
+ami.on('eventCdr', function(data){
     var evt = data;
     console.log(evt);
 });
