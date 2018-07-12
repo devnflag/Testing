@@ -16,12 +16,12 @@
             $Minutos = $T["Minutos"];
             $Segundos = $T["Segundos"];
             $agi->set_variable(test,$T["Segundos"]);
-            /* if($Segundos > 0){
-                $agi->set_variable(TimeOut,$Segundos);
-                $agi->exec_goto($Exten,2);
+            if($Segundos > 0){
+                /* $agi->set_variable(TimeOut,$Segundos);
+                $agi->exec_goto($Exten,2); */
             }else{
                 $agi->hangup();//ir a no tiene saldo disponible
-            } */
+            }
         }
     }else{
         $agi->hangup();
