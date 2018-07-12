@@ -20,7 +20,7 @@
          */
         public function __construct($Link = "nflag"){
             $this->Link = $Link;
-            /* $Conf = parse_ini_file("conf.ini");
+            $Conf = parse_ini_file(dirname(__FILE__) . DIRECTORY_SEPARATOR . "conf.ini");
             if($Link == "nflag"){
                 $this->Server = $Conf["serverDB"];
                 $this->Pass = $Conf["passDB"];
@@ -42,7 +42,7 @@
             }
             if (!isset($_SESSION)){
                 session_start();
-            } */
+            }
         }
 
         public function connect() {
