@@ -2,10 +2,9 @@
 <?php
 
     require("/var/www/html/class/agi/phpagi.php");
-    include_once("/var/www/html/class/db/DB.php");
+    include_once("/var/www/html/includes/AGI/db/DB.php");
 
     $agi = new AGI();
-    $db = new DB();
 
     $Anexo = $argv[1];
     $Exten = $argv[2];
@@ -22,6 +21,7 @@
                     WHERE
                         Ex.Extension='".$Anexo."'";
     $agi->set_variable(test,$SqlTiempo);
+    $Tiempo = $Connection->query("SELECT patron,rama,gestion  FROM BT_patron");
     /*$Tiempo = $db->select($SqlTiempo);
     if(count($Tiempo) > 0){
         $Minutos = $Tiempo["Minutos"];
