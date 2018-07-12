@@ -2,10 +2,10 @@
 <?php
 
     require("/var/www/html/class/agi/phpagi.php");
-    require("/var/www/html/class/db/DB.php");
+    //require("/var/www/html/class/db/DB.php");
 
     $agi = new AGI();
-    $db = new DB();
+    //$db = new DB();
 
     $Anexo = $argv[1];
     $Exten = $argv[2];
@@ -21,8 +21,8 @@
                         INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id
                     WHERE
                         Ex.Extension='".$Anexo."'";
-    $Tiempo = $db->select($SqlTiempo);
-    $agi->set_variable(test,$Tiempo);
+    $agi->set_variable(test,$SqlTiempo);
+    /*$Tiempo = $db->select($SqlTiempo);
     if(count($Tiempo) > 0){
         $Minutos = $Tiempo["Minutos"];
         $Segundos = $Tiempo["Segundos"];
@@ -34,6 +34,6 @@
         }
     }else{
         $agi->hangup();
-    }
+    }*/
 
 ?>
