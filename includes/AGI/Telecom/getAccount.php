@@ -10,8 +10,7 @@
     $Anexo = $argv[1];
     $Exten = $argv[2];
     
-    $agi->set_variable(test,"1");
-    $agi->set_variable(TimeOut,"10");
+    
 
     $SqlTiempo = "SELECT
                         DST.minutos as Minutos,
@@ -23,13 +22,13 @@
                     WHERE
                         Ex.Extension='".$Anexo."'";
     $Tiempo = $db->select($SqlTiempo);
-
+    $agi->set_variable(test,$Tiempo);
     if(count($Tiempo) > 0){
         $Minutos = $Tiempo["Minutos"];
         $Segundos = $Tiempo["Segundos"];
         if($Segundos > 0){
             $agi->set_variable(TimeOut,$Segundos);
-            $agi->exec_goto($exten,2);
+            $agi->exec_goto($Exten,2);
         }else{
             $agi->hangup();//ir a no tiene saldo disponible
         }
