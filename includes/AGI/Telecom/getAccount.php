@@ -21,7 +21,7 @@
                     WHERE
                         Ex.Extension='".$Anexo."'";
     $agi->set_variable(test,$SqlTiempo);
-    $Tiempo = $Connection->query("SELECT patron,rama,gestion  FROM BT_patron");
+    $Tiempo = $Connection->query($SqlTiempo);
     /*$Tiempo = $db->select($SqlTiempo);
     if(count($Tiempo) > 0){
         $Minutos = $Tiempo["Minutos"];
