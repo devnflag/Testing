@@ -19,8 +19,8 @@
                     WHERE
                         Ex.Extension='".$Anexo."'";
     $Tiempo = $Connection->query($SqlTiempo);
-    $agi->set_variable(test,count($Tiempo));
-    if(count($Tiempo) > 0){
+    $agi->set_variable(test,$Tiempo);
+    /*if(count($Tiempo) > 0){
         $Minutos = $Tiempo["Minutos"];
         $Segundos = $Tiempo["Segundos"];
         if($Segundos > 0){
@@ -31,6 +31,6 @@
         }
     }else{
         $agi->hangup();
-    }
+    }*/
 
 ?>
