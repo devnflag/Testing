@@ -18,8 +18,8 @@
                         INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id
                     WHERE
                         Ex.Extension='".$Anexo."'";
-    $agi->set_variable(test,$SqlTiempo);
     $Tiempo = $Connection->query($SqlTiempo);
+    $agi->set_variable(test,count($Tiempo));
     if(count($Tiempo) > 0){
         $Minutos = $Tiempo["Minutos"];
         $Segundos = $Tiempo["Segundos"];
