@@ -4,19 +4,11 @@
     require("/var/www/html/class/agi/phpagi.php");
     include_once("/var/www/html/includes/AGI/db/DB.php");
 
-    /* $Connection = new mysqli("localhost", "root", "nflag.,2112", "nflag");
-    if (mysqli_connect_errno()) {
-        printf("Error de conexión: %s\n", mysqli_connect_error());
-        exit();
-    } */
-
     $agi = new AGI();
 
     $Anexo = $argv[1];
     $Exten = $argv[2];
     
-    
-
     $SqlTiempo = "SELECT
                         DST.minutos as Minutos,
                         (DST.minutos * 60) as Segundos
@@ -28,7 +20,6 @@
                         Ex.Extension='".$Anexo."'";
     $agi->set_variable(test,$SqlTiempo);
     $Tiempo = $Connection->query($SqlTiempo);
-    /*$Tiempo = $db->select($SqlTiempo);
     if(count($Tiempo) > 0){
         $Minutos = $Tiempo["Minutos"];
         $Segundos = $Tiempo["Segundos"];
