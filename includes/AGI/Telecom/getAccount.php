@@ -14,7 +14,7 @@
     if(count($Tiempo) > 0){
         foreach($Tiempo as $T){
             $Minutos = $T["Minutos"];
-            $Segundos = $T["Segundos"];
+            $Segundos = round($T["Segundos"]);
             $agi->set_variable(test,$T["Segundos"]);
             if($Segundos > 0){
                 $agi->set_variable(TimeOut,$Segundos);
