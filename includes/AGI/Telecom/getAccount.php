@@ -9,9 +9,9 @@
     $agi->set_variable(test,"1");
 
     if($Anexo == "2001"){
-        $agi->exec_goto($exten,2);
+        //$agi->exec_goto($exten,2);
     }else{
-        $agi->hangup();
+        //$agi->hangup();
     }
 
 ?>
