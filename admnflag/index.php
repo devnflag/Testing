@@ -1,0 +1,13 @@
+<?php
+    session_start();
+    //unset($_SESSION["userID"]);
+    if(isset($_SESSION["userID_admnflag"])){
+        include_once("header/header.php");
+        include_once("middle/dashboard/dashboard.php");
+        include_once("footer/footer.php");
+    }else{
+        include_once("header/headerLogin.php");
+        include_once("middle/login/login.php");
+        include_once("footer/footerLogin.php");
+    }
+?>
