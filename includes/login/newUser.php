@@ -1,9 +1,9 @@
 <?php
-    include_once("../../class/db/DB.php");
-    include_once("../../class/login/login.php");
-    include_once("../../class/servicios/servicios.php");
-    include_once("../../class/clientes/clientes.php");
-    include_once("../../class/extensiones/extensiones.php");
+    include_once("../class/db/DB.php");
+    include_once("../class/login/login.php");
+    include_once("../class/servicios/servicios.php");
+    include_once("../class/clientes/clientes.php");
+    include_once("../class/extensiones/extensiones.php");
     
     $LoginClass = new Login();
 
