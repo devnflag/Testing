@@ -15,6 +15,6 @@
                     <button name="btnLogin" class="btn btn-primary btn--icon-text">Entrar <i class="zmdi zmdi-arrow-forward"></i></button>
                 </div>
                 <a class="btn btn-light" href="#" role="button">¿Olvidó su contraseña?</a>
-                <a class="btn btn-light" href="login/newUSer.php" role="button">Registrar</a>
+                <a class="btn btn-light" href="login/newUser.php" role="button">Registrar</a>
             </div>
         </div>
