@@ -43,7 +43,7 @@
                             $Usuario = $Usuario["Data"];
                             $idUsuario = $Usuario["id"];
                             $Extension = $ExtensionesClass->newExtension($idUsuario);
-                            $asm->connect("localhost","nflag","nflag");
+                            $asm->connect("localhost","nflag","nflag.,2112");
                             $ChannelsReponse = $asm->command("reload");
                         }
                     }
