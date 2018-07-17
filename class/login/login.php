@@ -48,11 +48,13 @@
                             if($SipTelecomData["result"]){
                                 $AGIClass->connect("localhost","nflag","nflag.,2112");
                                 $ChannelsReponse = $AGIClass->command("reload");
+                                $ToReturn["result"] = true;
                             }
                         }
                     }
                 }
             }
+            return $ToReturn;
         }
         function addUser($Username,$Password,$Rol,$idCliente){
             $db = new DB();

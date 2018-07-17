@@ -47,35 +47,37 @@ $(document).ready(function(){
             async: false,
             success: function(data){
                 console.log(data);
-                var Json = JSON.parse(data);
-                console.log(Json);
-                /* if(Json.result){
-                    swal({
-                        title: '¡Bienvenido!',
-                        text: 'Ha iniciado sesion satisfactoriamente.',
-                        type: 'success',
-                        timer: 2000,
-                        buttonsStyling: false,
-                        showConfirmButton: false,
-                        buttonsStyling: false,
-                        confirmButtonClass: 'btn btn-sm btn-light',
-                        background: 'rgba(0, 0, 0, 0.96)'
-                    }).then(function(){
-                        location.reload();
-                    });
-                }else{
-                    swal({
-                        title: '¡Error!',
-                        text: 'Usuario o Contraseña incorrecta.',
-                        type: 'warning',
-                        timer: 2000,
-                        buttonsStyling: false,
-                        showConfirmButton: false,
-                        buttonsStyling: false,
-                        confirmButtonClass: 'btn btn-sm btn-light',
-                        background: 'rgba(0, 0, 0, 0.96)'
-                    });
-                } */
+                if(isJson(data)){
+                    var Json = JSON.parse(data);
+                    console.log(Json);
+                    if(Json.result){
+                        swal({
+                            title: '¡Felicidades!',
+                            text: 'Su cuenta ha sido registrada correctamente.',
+                            type: 'success',
+                            timer: 2000,
+                            buttonsStyling: false,
+                            showConfirmButton: false,
+                            buttonsStyling: false,
+                            confirmButtonClass: 'btn btn-sm btn-light',
+                            background: 'rgba(0, 0, 0, 0.96)'
+                        }).then(function(){
+                            windows.location = "../../index.php";
+                        });
+                    }else{
+                        swal({
+                            title: '¡Error!',
+                            text: 'Hubo un problema paracrear la cuenta, comuniquese con soporte.',
+                            type: 'warning',
+                            timer: 2000,
+                            buttonsStyling: false,
+                            showConfirmButton: false,
+                            buttonsStyling: false,
+                            confirmButtonClass: 'btn btn-sm btn-light',
+                            background: 'rgba(0, 0, 0, 0.96)'
+                        });
+                    }
+                }
             },
             error: function(){
             }
