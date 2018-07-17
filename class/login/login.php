@@ -25,7 +25,8 @@
             $db = new DB();
             $ClientesClass = new Clientes();
             $ExtensionesClass = new Extensiones();
-            $asm = new AGI_AsteriskManager();
+            $SipTelecomClass = new SipTelecom();
+            $AGIClass = new AGI_AsteriskManager();
             
             $ToReturn = array();
             $ToReturn["result"] = false;
@@ -43,8 +44,11 @@
                             $Usuario = $Usuario["Data"];
                             $idUsuario = $Usuario["id"];
                             $Extension = $ExtensionesClass->newExtension($idUsuario);
-                            $asm->connect("localhost","nflag","nflag.,2112");
-                            $ChannelsReponse = $asm->command("reload");
+                            $SipTelecomData = $SipTelecomClass->newData($idUsuario);
+                            if($SipTelecomData["result"]){
+                                $AGIClass->connect("localhost","nflag","nflag.,2112");
+                                $ChannelsReponse = $AGIClass->command("reload");
+                            }
                         }
                     }
                 }

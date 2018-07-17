@@ -5,6 +5,7 @@
     include_once("../../class/clientes/clientes.php");
     include_once("../../class/extensiones/extensiones.php");
     include_once("../../class/agi/phpagi.php");
+    include_once("../../class/siptelecom/siptelecom.php");
     
     $LoginClass = new Login();
 
