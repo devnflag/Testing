@@ -1,5 +1,5 @@
 <?php
-    include_once("../../class/db/DB.php");
+    include_once("../../class/db/db.php");
     include_once("../../class/login/login.php");
     
     $LoginClass = new Login();
