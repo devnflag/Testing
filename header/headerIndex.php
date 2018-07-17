@@ -3,7 +3,8 @@
         session_start();
     }
     include_once("class/db/db.php");
-    $db = new DB();
+    include_once("class/menu/menu.php");
+    $MenuClass = new Menu();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -364,24 +365,7 @@
                         <li class="navigation__active"><a href="index.php"><i class="zmdi zmdi-home"></i> Home</a></li>
 
                         <?php
-                            $SqlMenuRoot = "select * from menu where idPadre='0'";
-                            $MenuRoot = $db->select($SqlMenuRoot);
-                            $MenuHTML = "";
-                            foreach($MenuRoot as $Root){
-                                $MenuHTML .= "<li class='navigation__sub @@".$Root["Descripcion"]."'>";
-                                    $MenuHTML .= "<a href=''><i class='".$Root["Logo"]."'></i> ".$Root["Descripcion"]."</a>";
-                                    $SqlMenuChild = "select * from menu where idPadre='".$Root["id"]."'";
-                                    $MenuChild = $db->select($SqlMenuChild);
-                                    if(count($MenuChild) > 0){
-                                        $MenuHTML .= "<ul>";
-                                            foreach($MenuChild as $Child){
-                                                $MenuHTML .= "<li class='@@".$Child["id"]."'><a href='hidden-sidebar.html'>".$Child["Descripcion"]."</a></li>";
-                                            }
-                                        $MenuHTML .= "</ul>";
-                                    }
-                                $MenuHTML .= "</li>";
-                            }
-                            echo $MenuHTML;
+                            echo $MenuClass->getMenu();
                         ?>
 
                         <!-- <li class="navigation__sub @@variantsactive">
