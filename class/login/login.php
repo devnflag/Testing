@@ -6,13 +6,13 @@
             $ToReturn = array();
             $ToReturn["result"] = false;
 
-            $SqlUsernameMatch = "select * from usuarios where usuario='".$User."' LIMIT 1";
+            echo $SqlUsernameMatch = "select * from usuarios where nombreUsuario='".$User."' LIMIT 1";
             $UsernameMatch = $db->select($SqlUsernameMatch);
             if(count($UsernameMatch) > 0){
 
                 $userID = $UsernameMatch[0]["id"];
 
-                $SqlPasswordMatch = "select * from usuarios where id='".$userID."' and password='".$Password."'";
+                $SqlPasswordMatch = "select * from usuarios where id='".$userID."' and claveUsuario='".$Password."'";
                 $PasswordMatch = $db->select($SqlPasswordMatch);
                 if(count($PasswordMatch) > 0){
                     $ToReturn["result"] = true;
