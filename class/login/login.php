@@ -37,7 +37,7 @@
                 if($Cliente["result"]){
                     $Cliente = $Cliente["Data"];
                     $idCliente = $Cliente["id"];
-                    $InsertUsuario = $this->addUser($Mail,$Mail,$Rol,$idCliente);
+                    $InsertUsuario = $this->addUser($Mail,$Mail,$FullName,$Mail,$Rol,$idCliente);
                     if($InsertUsuario){
                         $Usuario = $this->getUserByUserName($Mail);
                         if($Usuario["result"]){
@@ -56,10 +56,10 @@
             }
             return $ToReturn;
         }
-        function addUser($Username,$Password,$Rol,$idCliente){
+        function addUser($Username,$Password,$Nombre,$Mail,$Rol,$idCliente){
             $db = new DB();
             $ToReturn = false;
-            $SqlInsertUser = "insert into usuarios (nombreUsuario,claveUsuario,idRol,fechaCreacion) values('".$Username."','".$Password."','".$Rol."',NOW())";
+            $SqlInsertUser = "insert into usuarios (nombreUsuario,claveUsuario,nombre,correo,idRol,fechaCreacion) values('".$Username."','".$Password."','".$Nombre."','".$Mail."','".$Rol."',NOW())";
             $InsertUser = $db->query($SqlInsertUser);
             if($InsertUser){
                 $Usuario = $this->getUserByUserName($Username);
@@ -85,6 +85,17 @@
                 $ToReturn["Data"] = $Usuario[0];
                 $ToReturn["result"] = true;
             }
+            return $ToReturn;
+        }
+        function getUserData(){
+            $db = new DB();
+            $ToReturn = array();
+            $SqlUsuario = "select * from usuarios where id='".$_SESSION["userID"]."'";
+            $Usuario = $db->select($SqlUsuario);
+            $Usuario = $Usuario[0];
+            $ToReturn["Nombre"] = $Usuario["nombre"];
+            $ToReturn["Correo"] = $Usuario["correo"];
+            $ToReturn["Avatar"] = "";
             return $ToReturn;
         }
     }

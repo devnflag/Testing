@@ -3,15 +3,20 @@
         session_start();
     }
     include_once("../class/db/db.php");
-    include_once("class/menu/menu.php");
+    include_once("../class/menu/menu.php");
+    include_once("../class/login/login.php");
+    include_once("../class/servicios/servicios.php");
+    include_once("../class/siptelecom/siptelecom.php");
     $MenuClass = new Menu();
+    $LoginClass = new Login();
+    $userData = $LoginClass->getUserData();
 ?>
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <title>Super Admin 2.0</title>
+        <title>NFLAG</title>
 
         <!-- Vendor styles -->
         <link rel="stylesheet" href="../vendors/bower_components/material-design-iconic-font/dist/css/material-design-iconic-font.min.css">
@@ -25,7 +30,7 @@
         <link rel="stylesheet" href="../css/app.min.css">
     </head>
 
-    <body data-sa-theme="1">
+    <body data-sa-theme="3">
         <main class="main">
             <div class="page-loader">
                 <div class="page-loader__spinner">
@@ -41,7 +46,7 @@
                 </div>
 
                 <div class="logo hidden-sm-down">
-                    <h1><a href="index.html">Super Admin 2.0</a></h1>
+                    <h1><a href="../index.php">NFLAG</a></h1>
                 </div>
 
                 <form class="search">
@@ -349,20 +354,20 @@
                         <div class="user__info" data-toggle="dropdown">
                             <img class="user__img" src="../demo/img/profile-pics/8.jpg" alt="">
                             <div>
-                                <div class="user__name">Malinda Hollaway</div>
-                                <div class="user__email">malinda-h@gmail.com</div>
+                                <div class="user__name"><?php echo $userData["Nombre"]; ?></div>
+                                <div class="user__email"><?php echo $userData["Correo"]; ?></div>
                             </div>
                         </div>
 
                         <div class="dropdown-menu">
                             <a class="dropdown-item" href="">View Profile</a>
                             <a class="dropdown-item" href="">Settings</a>
-                            <a class="dropdown-item" href="">Logout</a>
+                            <a class="dropdown-item" href="../logout.php">Logout</a>
                         </div>
                     </div>
 
                     <ul class="navigation">
-                        <li class="navigation__active"><a href="index.php"><i class="zmdi zmdi-home"></i> Home</a></li>
+                        <li class="navigation__active"><a href="../index.php"><i class="zmdi zmdi-home"></i> Home</a></li>
 
                         <?php
                             echo $MenuClass->getMenu();
@@ -484,7 +489,7 @@
 
             <div class="themes">
                 <div class="scrollbar-inner">
-                    <a href="" class="themes__item active" data-sa-value="1"><img src="../img/bg/1.jpg" alt=""></a>
+                    <a href="" class="themes__item" data-sa-value="1"><img src="../img/bg/1.jpg" alt=""></a>
                     <a href="" class="themes__item" data-sa-value="2"><img src="../img/bg/2.jpg" alt=""></a>
                     <a href="" class="themes__item" data-sa-value="3"><img src="../img/bg/3.jpg" alt=""></a>
                     <a href="" class="themes__item" data-sa-value="4"><img src="../img/bg/4.jpg" alt=""></a>

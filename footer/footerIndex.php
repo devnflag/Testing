@@ -73,14 +73,6 @@
         <script src="js/plugins/sweetalert2/sweetalert2.all.js"></script>
         <script src="vendors/bower_components/select2/dist/js/select2.full.min.js"></script>
 
-        <!-- Charts and maps-->
-        <script src="demo/js/flot-charts/curved-line.js"></script>
-        <script src="demo/js/flot-charts/line.js"></script>
-        <script src="demo/js/flot-charts/dynamic.js"></script>
-        <script src="demo/js/flot-charts/chart-tooltips.js"></script>
-        <script src="demo/js/other-charts.js"></script>
-        <script src="demo/js/jqvmap.js"></script>
-
         <!-- App functions and actions -->
         <script src="js/app.min.js"></script>
         <script src="js/global/global.js"></script>

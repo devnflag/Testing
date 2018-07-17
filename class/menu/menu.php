@@ -1,7 +1,11 @@
 <?php
     class Menu{
 
-        function getMenu(){
+        function getMenu($isIndex = false){
+            $Direction = "../";
+            if($isIndex){
+                $Direction = "";
+            }
             $db = new DB(); 
             $SqlMenuRoot = "select
                                 M.*
@@ -25,11 +29,11 @@
                         $ToReturn .= "<a href=''><i class='".$Root["Logo"]."'></i> ".$Root["Descripcion"]."</a>";
                         $ToReturn .= "<ul>";
                             foreach($MenuChild as $Child){
-                                $ToReturn .= "<li class='@@".$Child["id"]."'><a href='".$Child["Link"]."'>".$Child["Descripcion"]."</a></li>";
+                                $ToReturn .= "<li class='@@".$Child["id"]."'><a href='".$Direction.$Child["Link"]."'>".$Child["Descripcion"]."</a></li>";
                             }
                         $ToReturn .= "</ul>";
                     }else{
-                        $ToReturn .= "<a href='".$Root["Link"]."'><i class='".$Root["Logo"]."'></i> ".$Root["Descripcion"]."</a>";
+                        $ToReturn .= "<a href='".$Direction.$Root["Link"]."'><i class='".$Root["Logo"]."'></i> ".$Root["Descripcion"]."</a>";
                     }
                 $ToReturn .= "</li>";
             }
