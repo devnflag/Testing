@@ -62,7 +62,7 @@ $(document).ready(function(){
                             confirmButtonClass: 'btn btn-sm btn-light',
                             background: 'rgba(0, 0, 0, 0.96)'
                         }).then(function(){
-                            windows.location = "../../index.php";
+                            window.location = "../../index.php";
                         });
                     }else{
                         swal({
