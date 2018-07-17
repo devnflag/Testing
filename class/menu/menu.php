@@ -2,6 +2,7 @@
     class Menu{
 
         function getMenu(){
+            $db = new DB();
             $SqlMenuRoot = "select
                                 M.*
                             from
