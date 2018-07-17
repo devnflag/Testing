@@ -6,7 +6,7 @@
             $ToReturn = array();
             $ToReturn["result"] = false;
 
-            echo $SqlUsernameMatch = "select * from usuarios where nombreUsuario='".$User."' LIMIT 1";
+            $SqlUsernameMatch = "select * from usuarios where nombreUsuario='".$User."' LIMIT 1";
             $UsernameMatch = $db->select($SqlUsernameMatch);
             if(count($UsernameMatch) > 0){
 
