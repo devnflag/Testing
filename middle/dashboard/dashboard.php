@@ -39,7 +39,7 @@
                                     <div class="row">
                                         <div class="card col-sm-12">
                                             <div class="card-body">
-                                            <h4 class="card-title"><?php echo $nombreServicio; ?></h4>
+                                                <h4 class="card-title"><?php echo $nombreServicio; ?></h4>
                                                 <h6 class="card-subtitle"><?php echo $descripcionServicio; ?></h6>
 
                                                 <div class="row">

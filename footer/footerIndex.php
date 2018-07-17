@@ -69,9 +69,13 @@
         <script src="vendors/bower_components/peity/jquery.peity.min.js"></script>
         <script src="vendors/bower_components/moment/min/moment.min.js"></script>
         <script src="vendors/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
-        <!-- <script src="vendors/bower_components/sweetalert2/dist/sweetalert2.min.js"></script> -->
         <script src="js/plugins/sweetalert2/sweetalert2.all.js"></script>
         <script src="vendors/bower_components/select2/dist/js/select2.full.min.js"></script>
+        <script src="vendors/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+        <script src="vendors/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js"></script>
+        <script src="vendors/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
+        <script src="vendors/bower_components/jszip/dist/jszip.min.js"></script>
+        <script src="vendors/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
 
         <!-- App functions and actions -->
         <script src="js/app.min.js"></script>
