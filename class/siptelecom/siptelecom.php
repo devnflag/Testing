@@ -59,7 +59,7 @@
         function getCallsByMonthAndYear($Month,$Year){
             $db = new DB();
             $Extension = $this->getExtension($_SESSION["userID"]);
-            $SqlCalls = "SELECT calldate as FechaHora, dst as NumeroDestino, billsec as Duraccion, disposition as Accion from cdr where SRC = '".$Extension."' AND MONTH(calldate)='".$Month."' AND YEAR(calldate)='".$Year."' ORDER BY calldate DESC";
+            $SqlCalls = "SELECT DISTINCT calldate as FechaHora, dst as NumeroDestino, billsec as Duraccion, disposition as Accion from cdr where SRC = '".$Extension."' AND MONTH(calldate)='".$Month."' AND YEAR(calldate)='".$Year."' ORDER BY calldate DESC";
             $Calls = $db->select($SqlCalls);
             return $Calls;
         }
