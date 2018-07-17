@@ -2,7 +2,7 @@
     class Menu{
 
         function getMenu(){
-            $db = new DB();
+            $db = new DB(); 
             $SqlMenuRoot = "select
                                 M.*
                             from
@@ -19,15 +19,17 @@
             $ToReturn = "";
             foreach($MenuRoot as $Root){
                 $ToReturn .= "<li class='navigation__sub @@".$Root["Descripcion"]."'>";
-                    $ToReturn .= "<a href=''><i class='".$Root["Logo"]."'></i> ".$Root["Descripcion"]."</a>";
                     $SqlMenuChild = "select * from menu where idPadre='".$Root["id"]."'";
                     $MenuChild = $db->select($SqlMenuChild);
                     if(count($MenuChild) > 0){
+                        $ToReturn .= "<a href=''><i class='".$Root["Logo"]."'></i> ".$Root["Descripcion"]."</a>";
                         $ToReturn .= "<ul>";
                             foreach($MenuChild as $Child){
-                                $ToReturn .= "<li class='@@".$Child["id"]."'><a href='hidden-sidebar.html'>".$Child["Descripcion"]."</a></li>";
+                                $ToReturn .= "<li class='@@".$Child["id"]."'><a href='".$Child["Link"]."'>".$Child["Descripcion"]."</a></li>";
                             }
                         $ToReturn .= "</ul>";
+                    }else{
+                        $ToReturn .= "<a href='".$Root["Link"]."'><i class='".$Root["Logo"]."'></i> ".$Root["Descripcion"]."</a>";
                     }
                 $ToReturn .= "</li>";
             }
