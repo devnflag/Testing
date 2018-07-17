@@ -25,6 +25,8 @@
             $db = new DB();
             $ClientesClass = new Clientes();
             $ExtensionesClass = new Extensiones();
+            $asm = new AGI_AsteriskManager();
+            
             $ToReturn = array();
             $ToReturn["result"] = false;
             
@@ -41,6 +43,8 @@
                             $Usuario = $Usuario["Data"];
                             $idUsuario = $Usuario["id"];
                             $Extension = $ExtensionesClass->newExtension($idUsuario);
+                            $asm->connect("localhost","nflag","nflag");
+                            $ChannelsReponse = $asm->command("reload");
                         }
                     }
                 }
