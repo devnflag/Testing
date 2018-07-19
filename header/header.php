@@ -28,6 +28,7 @@
 
         <!-- App styles -->
         <link rel="stylesheet" href="../css/app.min.css">
+        <link rel="stylesheet" href="../css/nflag.css">
     </head>
 
     <body data-sa-theme="3">

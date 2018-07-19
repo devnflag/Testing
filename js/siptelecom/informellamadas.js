@@ -3,6 +3,7 @@ $(document).ready(function(){
     var ObjectTable;
     var DataTable = {}
 
+    getLastSixMonths();
     updateTable();
 
     $("select[name='Periodo']").change(function(){
@@ -28,6 +29,21 @@ $(document).ready(function(){
             }
         });
     }
+    function getLastSixMonths(){
+        $.ajax({
+            type: "POST",
+            url: "../includes/siptelecom/getLastSixMonths.php",
+            data: {},
+            async: false,
+            success: function(data){
+                if(isJson(data)){
+                    
+                }
+            },
+            error: function(){
+            }
+        });
+    }
     function updateTable(){
         ObjectTable = $('#dt_informeLlamadas').DataTable({
             "bDestroy": true,
@@ -46,8 +62,6 @@ $(document).ready(function(){
             "columnDefs": [
                 {
                     "targets": 3,
-                    "searchable": false,
-                    "data": "Accion",
                     "render": function( data, type, row ) {
                         switch(data){
                             case "ANSWERED":
@@ -57,6 +71,7 @@ $(document).ready(function(){
                                 return "NO CONTESTADA";
                             break;
                             default:
+                                return "ERROR"
                             break;
                         }
                     }
