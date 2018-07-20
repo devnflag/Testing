@@ -36,9 +36,9 @@ $(document).ready(function(){
             data: {},
             async: false,
             success: function(data){
-                if(isJson(data)){
-                    
-                }
+                console.log(data);
+                $("select[name='Periodo']").html(data);
+                //$("select[name='Periodo']").select2();
             },
             error: function(){
             }
