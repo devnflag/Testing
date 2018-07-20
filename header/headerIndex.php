@@ -25,6 +25,7 @@
         <link rel="stylesheet" href="vendors/bower_components/fullcalendar/dist/fullcalendar.min.css">
         <link rel="stylesheet" href="vendors/bower_components/sweetalert2/dist/sweetalert2.min.css">
         <link rel="stylesheet" href="vendors/bower_components/select2/dist/css/select2.min.css">
+        <link rel="stylesheet" href="vendors/bower_components/dropzone/dist/dropzone.css">
 
         <!-- App styles -->
         <link rel="stylesheet" href="css/app.min.css">
