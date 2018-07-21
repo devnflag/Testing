@@ -10,10 +10,7 @@
                                 <div class="col-sm-4">&nbsp;</div>
                                 <div class="col-sm-4">
                                     <h6>Seleccione el periodo a consultar</h6>
-                                    <select class="select2 select2-hidden-accessible" name="Periodo" tabindex="-1" aria-hidden="true">
-                                        <option value="">Seleccione</option>
-                                        <option value="07/2018">Julio 2018</option>
-                                    </select>
+                                    <select class="select2 select2-hidden-accessible" name="Periodo" tabindex="-1" aria-hidden="true"></select>
                                 </div>
                                 <div class="col-sm-4"></div>
                             </div>

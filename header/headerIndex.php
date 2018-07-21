@@ -7,8 +7,11 @@
     include_once("class/login/login.php");
     include_once("class/servicios/servicios.php");
     include_once("class/siptelecom/siptelecom.php");
+    include_once("class/extensiones/extensiones.php");
+    include_once("class/globals/globals.php");
     $MenuClass = new Menu();
     $LoginClass = new Login();
+    $GlobalsClass = new Globals();
     $userData = $LoginClass->getUserData();
 ?>
 <!DOCTYPE html>
