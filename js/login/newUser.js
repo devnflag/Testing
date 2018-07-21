@@ -26,7 +26,7 @@ $(document).ready(function(){
         if(Mail == ReMail){
             addClient();
         }
-    })
+    });
 
     function addClient(){
         var FullName = $("input[name='name']").val();
@@ -62,7 +62,7 @@ $(document).ready(function(){
                             confirmButtonClass: 'btn btn-sm btn-light',
                             background: 'rgba(0, 0, 0, 0.96)'
                         }).then(function(){
-                            window.location = "../../index.php";
+                            window.location = "../index.php";
                         });
                     }else{
                         swal({

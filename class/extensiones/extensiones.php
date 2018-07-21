@@ -5,11 +5,12 @@
             $db = new DB();
             $ToReturn = array();
             $ToReturn["result"] = false;
-            $SqlInsert = "insert into Extensiones (Extension,idUsuario) select max(Extension) + 1,'".$idUsuario."' from Extensiones";
+            $Password = substr(md5(microtime()), 1, 8);
+            $SqlInsert = "insert into Extensiones (Extension,idUsuario,Clave) select max(Extension) + 1,'".$idUsuario."','".$Password."' from Extensiones";
             $Insert = $db->query($SqlInsert);
             if($Insert){
                 $ToReturn = $this->getExtensionByUserID($idUsuario);
-                $this->addExtensionFile($ToReturn["Data"]["Extension"],"inbound","NFLAG-Netelip");
+                $this->addExtensionFile($ToReturn["Data"]["Extension"],$Password,"NFLAG-Netelip");
             }
             return $ToReturn;
         }

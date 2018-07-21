@@ -21,7 +21,7 @@
             }
             return $ToReturn;
         }
-        function newUser($FullName,$DNI,$Mail,$Address,$Rol){
+        function newUser($FullName,$DNI,$Mail,$Address,$Rol,$Password){
             $db = new DB();
             $ClientesClass = new Clientes();
             $ExtensionesClass = new Extensiones();
@@ -37,7 +37,7 @@
                 if($Cliente["result"]){
                     $Cliente = $Cliente["Data"];
                     $idCliente = $Cliente["id"];
-                    $InsertUsuario = $this->addUser($Mail,$Mail,$FullName,$Mail,$Rol,$idCliente);
+                    $InsertUsuario = $this->addUser($Mail,$Password,$FullName,$Mail,$Rol,$idCliente);
                     if($InsertUsuario){
                         $Usuario = $this->getUserByUserName($Mail);
                         if($Usuario["result"]){

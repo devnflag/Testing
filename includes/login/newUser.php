@@ -6,6 +6,9 @@
     include_once("../../class/extensiones/extensiones.php");
     include_once("../../class/agi/phpagi.php");
     include_once("../../class/siptelecom/siptelecom.php");
+    include_once("../../class/mail/mail.php");
+    include_once("../../includes/PHPMailer/class.phpmailer.php");
+    include_once("../../includes/PHPMailer/class.smtp.php");
     
     $LoginClass = new Login();
 
@@ -13,8 +16,13 @@
     $DNI = $_POST["DNI"];
     $Mail = $_POST["Mail"];
     $Address = $_POST["Address"];
+    $Password = substr(md5(microtime()), 1, 8);
     
-    $ToReturn = $LoginClass->newUser($FullName,$DNI,$Mail,$Address,'1');
+    $ToReturn = $LoginClass->newUser($FullName,$DNI,$Mail,$Address,'1',$Password);
+    if($ToReturn["result"]){
+        $MailClass = new Mail();
+        $MailClass->sendMailNewUser($Mail,$FullName,$Password);
+    }
 
     echo json_encode($ToReturn);
 ?>
