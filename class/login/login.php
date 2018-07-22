@@ -21,6 +21,18 @@
             }
             return $ToReturn;
         }
+        function MailExist($Mail){
+            $db = new DB();
+            $ToReturn = array();
+            $ToReturn["result"] = false;
+            $SqlMail = "select * from usuarios where nombreUsuario='".$Mail."'";
+            $Mail = $db->select($SqlMail);
+            if(count($Mail) > 0){
+                $ToReturn["result"] = true;
+                $ToReturn["Message"] = "Correo electronico ya existe, utilice la opción de recuperacion de contraseña.";
+            }
+            return $ToReturn;
+        }
         function newUser($FullName,$DNI,$Mail,$Address,$Rol,$Password){
             $db = new DB();
             $ClientesClass = new Clientes();

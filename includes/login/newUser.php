@@ -18,10 +18,17 @@
     $Address = $_POST["Address"];
     $Password = substr(md5(microtime()), 1, 8);
     
-    $ToReturn = $LoginClass->newUser($FullName,$DNI,$Mail,$Address,'1',$Password);
-    if($ToReturn["result"]){
-        $MailClass = new Mail();
-        $MailClass->sendMailNewUser($Mail,$FullName,$Password);
+    $MailExist = $LoginClass->MailExist($Mail);
+    if(!$MailExist["result"]){
+        $ToReturn = $LoginClass->newUser($FullName,$DNI,$Mail,$Address,'1',$Password);
+        if($ToReturn["result"]){
+            $MailClass = new Mail();
+            $MailClass->sendMailNewUser($Mail,$FullName,$Password);
+        }
+    }else{
+        $MailExist["result"] = false;
+        $MailExist["FailMail"] = true;
+        $ToReturn = $MailExist;
     }
 
     echo json_encode($ToReturn);

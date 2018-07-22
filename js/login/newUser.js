@@ -65,17 +65,31 @@ $(document).ready(function(){
                             window.location = "../index.php";
                         });
                     }else{
-                        swal({
-                            title: '¡Error!',
-                            text: 'Hubo un problema paracrear la cuenta, comuniquese con soporte.',
-                            type: 'warning',
-                            timer: 2000,
-                            buttonsStyling: false,
-                            showConfirmButton: false,
-                            buttonsStyling: false,
-                            confirmButtonClass: 'btn btn-sm btn-light',
-                            background: 'rgba(0, 0, 0, 0.96)'
-                        });
+                        if(Json.FailMail){
+                            swal({
+                                title: '¡Error!',
+                                text: Json.Message,
+                                type: 'warning',
+                                timer: 2000,
+                                buttonsStyling: false,
+                                showConfirmButton: false,
+                                buttonsStyling: false,
+                                confirmButtonClass: 'btn btn-sm btn-light',
+                                background: 'rgba(0, 0, 0, 0.96)'
+                            });
+                        }else{
+                            swal({
+                                title: '¡Error!',
+                                text: 'Hubo un problema para crear la cuenta, comuniquese con soporte.',
+                                type: 'warning',
+                                timer: 2000,
+                                buttonsStyling: false,
+                                showConfirmButton: false,
+                                buttonsStyling: false,
+                                confirmButtonClass: 'btn btn-sm btn-light',
+                                background: 'rgba(0, 0, 0, 0.96)'
+                            });
+                        }
                     }
                 }
             },
