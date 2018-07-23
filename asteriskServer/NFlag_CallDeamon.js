@@ -52,22 +52,44 @@ db.connect(function(err) {
             console.log(evt);
             var Duration = evt.BillableSeconds;
             var Extension = evt.Source;
-            db.query("SELECT DST.minutos as Minutos, (DST.minutos * 60) as Segundos, Us.id as idUsuario FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='"+Extension+"'", function (err, recordset) {
+            db.query("SELECT DST.minutos as Minutos, (DST.minutos * 60) as Segundos, Us.id as idUsuario, DST.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='"+Extension+"'", function (err, recordset) {
                 recordset = JSON.parse(JSON.stringify(recordset));
                 if (err){
                 }else{
-                    var Segundos = recordset[0]["Segundos"];
+                    var MinutosActuales = recordset[0]["Minutos"];
+                    var SaldoActual = recordset[0]["Saldo"];
                     var idUsuario = recordset[0]["idUsuario"];
-                    Segundos -= Duration;
-                    var Minutos = (Segundos / 60);
-                    var Minutos = Minutos.toFixed(1);
-                    console.log("UPDATE data_sipTelecom SET minutos = '"+Minutos+"' where idUsuario='"+idUsuario+"'");
-                    db.query("UPDATE data_sipTelecom SET minutos = '"+Minutos+"' where idUsuario='"+idUsuario+"'", function (err, recordset) {
-                        //console.log(recordset);
-                        if (!err) {
+                    if(MinutosActuales > 0){
+                        var Segundos = recordset[0]["Segundos"];
+                        Segundos -= Duration;
+                        var Minutos = (Segundos / 60);
+                        Minutos = Minutos.toFixed(1);
+                        console.log("UPDATE data_sipTelecom SET minutos = '"+Minutos+"' where idUsuario='"+idUsuario+"'");
+                        db.query("UPDATE data_sipTelecom SET minutos = '"+Minutos+"' where idUsuario='"+idUsuario+"'", function (err, recordset) {
+                            //console.log(recordset);
+                            if (!err) {
 
-                        }
-                    });
+                            }
+                        });
+                    }else{
+                        db.query("SELECT precioUnitarioMinuto as Precio FROM config_sipTelecom", function (err, recordset) {
+                            recordset = JSON.parse(JSON.stringify(recordset));
+                            if (err){
+                            }else{
+                                var PrecioUnitario = recordset[0]["Precio"];
+                                var Minutos = (Duration * 60);
+                                Minutos = Minutos.toFixed(1);
+                                var Saldo = SaldoActual - (Minutos * PrecioUnitario);
+                                console.log("UPDATE data_sipTelecom SET saldo = '"+Saldo+"' where idUsuario='"+idUsuario+"'");
+                                db.query("UPDATE data_sipTelecom SET saldo = '"+Saldo+"' where idUsuario='"+idUsuario+"'", function (err, recordset) {
+                                    //console.log(recordset);
+                                    if (!err) {
+
+                                    }
+                                });
+                            }
+                        });
+                    }
                 }
             });
         });
