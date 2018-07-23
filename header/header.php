@@ -51,7 +51,7 @@
                 </div>
 
                 <div class="logo hidden-sm-down">
-                    <h1><a href="../index.php">NFLAG</a></h1>
+                    <h1><a href="../index.php"><img src="../img/logos/logo.png" alt="NFLAG" style="height: 72px;"> NFLAG</a></h1>
                 </div>
 
                 <form class="search">
@@ -62,26 +62,6 @@
                 </form>
 
                <ul class="top-nav">
-
-                    <li class="dropdown">
-                        <a href="#" data-toggle="dropdown" class=""><i class="zmdi zmdi-card zmdi-hc-fw"></i></a>
-                        <div class="dropdown-menu dropdown-menu-right dropdown-menu--block">
-                            <div class="dropdown-header">
-                                Saldo
-                            </div>
-
-                            <div class="listview listview--hover">
-                                <a href="" class="listview__item">
-                                    <div class="listview__content">
-                                        <div class="listview__heading">
-                                            SipTelecom <small>$ 5.000</small>
-                                        </div>
-                                        <p><button class="btn btn-primary" style="width: 100%;">Recargar</button></p>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    </li>
 
                     <!--<li class="dropdown top-nav__notifications">
                         <a href="" data-toggle="dropdown" class="top-nav__notify">
@@ -300,7 +280,7 @@
 
                     <div class="user">
                         <div class="user__info" data-toggle="dropdown">
-                            <img class="user__img" src="../demo/img/profile-pics/8.jpg" alt="">
+                            <!-- <img class="user__img" src="../demo/img/profile-pics/8.jpg" alt=""> -->
                             <div>
                                 <div class="user__name"><?php echo $userData["Nombre"]; ?></div>
                                 <div class="user__email"><?php echo $userData["Correo"]; ?></div>

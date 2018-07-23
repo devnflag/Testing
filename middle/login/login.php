@@ -1,5 +1,5 @@
-        <div class="row" style="position: absolute;width: 100vw;top:50px">
-            <h1 style="text-align: center;width: 100%;">NFlag</h1>
+        <div class="row" style="position: absolute;width: 100vw;top: 2vh;">
+            <img src="img/logos/logo.png" alt="" style="height: 200px;margin: 0 auto;">
         </div>
         <div class="login">
             <div class="login__block active">

@@ -1,3 +1,34 @@
+body{
+    background-image: none !important;
+    background-color: #E9F2F9 !important;
+}
+.header{
+    background-color: #000000 !important;
+}
+.sidebar{
+    background-color: #064780 !important;
+}
+.card{
+    background-color: #064780 !important;
+}
+.card .card {
+    background-color: #053966 !important;
+}
+.content__title>h1{
+    color: #064780 !important;
+}
+.content__title>h1{
+    color: #064780 !important;
+}
+.content__title>small{
+    color: #064780 !important;
+}
 .dataTables_wrapper select option{
     color: #000000;
+}
+.price-table__item {
+    background-color: #064780 !important;
+}
+.login__block{
+    background-color: #064780 !important;
 }

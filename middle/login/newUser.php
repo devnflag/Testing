@@ -1,5 +1,5 @@
         <div class="row" style="width: 100vw;margin:50px 0px 50px 0">
-            <h1 style="text-align: center;width: 100%;">NFlag</h1>
+            <img src="../img/logos/logo.png" alt="" style="height: 200px;margin: 0 auto;">
         </div>
         <div class="row" style="margin: 0px 15% 0px 15%;">
             <div class="card" style="width: 100%;">

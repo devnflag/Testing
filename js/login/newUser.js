@@ -27,6 +27,9 @@ $(document).ready(function(){
             addClient();
         }
     });
+    $("button[name='cancel']").click(function(){
+        window.location = "../index.php";
+    });
 
     function addClient(){
         var FullName = $("input[name='name']").val();
