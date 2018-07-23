@@ -1,7 +1,6 @@
-#!/usr/bin/php -q
 <?php
 
-    require("/var/www/html/class/agi/phpagi.php");
+    include_once("/var/www/html/class/agi/phpagi.php");
     include_once("/var/www/html/includes/AGI/db/DB.php");
 
     $agi = new AGI();
@@ -11,7 +10,7 @@
     
     $NoSaldo = false;
     
-    $SqlTiempo = "SELECT DST.minutos as Minutos, (DST.minutos * 60) as Segundos, DST.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='".$Anexo."'";
+    echo $SqlTiempo = "SELECT DST.minutos as Minutos, (DST.minutos * 60) as Segundos, DST.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='".$Anexo."'";
     $Tiempo = $Connection->query($SqlTiempo);
     if(count($Tiempo) > 0){
         foreach($Tiempo as $T){
