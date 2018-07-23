@@ -161,5 +161,14 @@
             }
             return $ToReturn;
         }
+        function eliminarBolsasVencimiento($Date){
+            $db = new DB();
+            $SqlUpdateMinutos = "update data_sipTelecom set minutos = 0 where idUsuario in (select idUsuario from usuarios_planes_sipTelecom where ADDDATE(fechaCulminacion, INTERVAL 1 DAY) <= '".$Date."')";
+            $UpdateMinutos = $db->query($SqlUpdateMinutos);
+            if($UpdateMinutos){
+                $SqlDeletePlan = "DELETE from usuarios_planes_sipTelecom where ADDDATE(fechaCulminacion, INTERVAL 1 DAY) <= '".$Date."'";
+                $DeletePlan = $db->query($SqlDeletePlan);    
+            }
+        }
     }
 ?>

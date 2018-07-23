@@ -68,7 +68,14 @@ db.connect(function(err) {
                         db.query("UPDATE data_sipTelecom SET minutos = '"+Minutos+"' where idUsuario='"+idUsuario+"'", function (err, recordset) {
                             //console.log(recordset);
                             if (!err) {
-
+                                if(Minutos <= 0){
+                                    db.query("DELETE FROM usuarios_planes_sipTelecom where idUsuario='"+idUsuario+"'", function (err, recordset) {
+                                        //console.log(recordset);
+                                        if (!err) {
+                                            
+                                        }
+                                    });
+                                }
                             }
                         });
                     }else{
