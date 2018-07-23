@@ -28,21 +28,21 @@
             }else{
                 echo $SqlPrecioMinutoUnitario = "SELECT precioUnitarioMinuto as Precio FROM config_sipTelecom";
                 $PrecioMinutoUnitario = $Connection->query($SqlPrecioMinutoUnitario);
-                print_r($PrecioMinutoUnitario);
-                $PrecioMinutoUnitario = $PrecioMinutoUnitario[0];
-                echo $PrecioMinuto = $PrecioMinutoUnitario["Precio"];
-                if($Saldo >= $PrecioMinuto){
-                    $Minutos = $Saldo / $PrecioMinuto;
-                    $Segundos = round($Minutos * 60);
-                    $agi->set_variable(test,$Segundos);
-                    if($Segundos > 0){
-                        $agi->set_variable(TimeOut,$Segundos);
-                        /* $agi->exec_goto($Exten,2); */
+                foreach($PrecioMinutoUnitario as $PrecioUnitario){
+                    echo $PrecioMinuto = $PrecioUnitario["Precio"];
+                    if($Saldo >= $PrecioMinuto){
+                        $Minutos = $Saldo / $PrecioMinuto;
+                        $Segundos = round($Minutos * 60);
+                        $agi->set_variable(test,$Segundos);
+                        if($Segundos > 0){
+                            $agi->set_variable(TimeOut,$Segundos);
+                            /* $agi->exec_goto($Exten,2); */
+                        }else{
+                            $NoSaldo = true;
+                        }
                     }else{
                         $NoSaldo = true;
                     }
-                }else{
-                    $NoSaldo = true;
                 }
             }
         }
