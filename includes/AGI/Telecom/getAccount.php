@@ -1,3 +1,4 @@
+#!/usr/bin/php -q
 <?php
 
     include_once("/var/www/html/class/agi/phpagi.php");
@@ -10,11 +11,11 @@
     
     $NoSaldo = false;
     
-    echo $SqlTiempo = "SELECT DST.minutos as Minutos, (DST.minutos * 60) as Segundos, DST.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='".$Anexo."'";
+    $SqlTiempo = "SELECT DST.minutos as Minutos, (DST.minutos * 60) as Segundos, DST.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='".$Anexo."'";
     $Tiempo = $Connection->query($SqlTiempo);
     if(count($Tiempo) > 0){
         foreach($Tiempo as $T){
-            echo $Saldo = $T["Saldo"];
+            $Saldo = $T["Saldo"];
             $Minutos = $T["Minutos"];
             if($Minutos > 0){
                 $Segundos = round($T["Segundos"]);
@@ -26,10 +27,10 @@
                     $NoSaldo = true;
                 }
             }else{
-                echo $SqlPrecioMinutoUnitario = "SELECT precioUnitarioMinuto as Precio FROM config_sipTelecom";
+                $SqlPrecioMinutoUnitario = "SELECT precioUnitarioMinuto as Precio FROM config_sipTelecom";
                 $PrecioMinutoUnitario = $Connection->query($SqlPrecioMinutoUnitario);
                 foreach($PrecioMinutoUnitario as $PrecioUnitario){
-                    echo $PrecioMinuto = $PrecioUnitario["Precio"];
+                    $PrecioMinuto = $PrecioUnitario["Precio"];
                     if($Saldo >= $PrecioMinuto){
                         $Minutos = $Saldo / $PrecioMinuto;
                         $Segundos = round($Minutos * 60);
