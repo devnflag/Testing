@@ -28,6 +28,7 @@
             }else{
                 echo $SqlPrecioMinutoUnitario = "SELECT precioUnitarioMinuto as Precio FROM config_sipTelecom";
                 $PrecioMinutoUnitario = $Connection->query($SqlPrecioMinutoUnitario);
+                print_r($PrecioMinutoUnitario);
                 $PrecioMinutoUnitario = $PrecioMinutoUnitario[0];
                 echo $PrecioMinuto = $PrecioMinutoUnitario["Precio"];
                 if($Saldo >= $PrecioMinuto){
