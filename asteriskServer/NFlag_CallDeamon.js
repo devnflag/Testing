@@ -77,7 +77,7 @@ db.connect(function(err) {
                             if (err){
                             }else{
                                 var PrecioUnitario = recordset[0]["Precio"];
-                                var Minutos = (Duration * 60);
+                                var Minutos = (Duration / 60);
                                 Minutos = Minutos.toFixed(1);
                                 var Saldo = SaldoActual - (Minutos * PrecioUnitario);
                                 console.log("UPDATE data_sipTelecom SET saldo = '"+Saldo+"' where idUsuario='"+idUsuario+"'");
