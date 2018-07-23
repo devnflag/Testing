@@ -15,7 +15,7 @@
     $Tiempo = $Connection->query($SqlTiempo);
     if(count($Tiempo) > 0){
         foreach($Tiempo as $T){
-            $Saldo = $T["Saldo"];
+            echo $Saldo = $T["Saldo"];
             $Minutos = $T["Minutos"];
             if($Minutos > 0){
                 $Segundos = round($T["Segundos"]);
@@ -27,10 +27,10 @@
                     $NoSaldo = true;
                 }
             }else{
-                $SqlPrecioMinutoUnitario = "SELECT precioUnitarioMinuto as Precio FROM config_sipTelecom";
+                echo $SqlPrecioMinutoUnitario = "SELECT precioUnitarioMinuto as Precio FROM config_sipTelecom";
                 $PrecioMinutoUnitario = $Connection->query($SqlPrecioMinutoUnitario);
                 $PrecioMinutoUnitario = $PrecioMinutoUnitario[0];
-                $PrecioMinuto = $PrecioMinutoUnitario["Precio"];
+                echo $PrecioMinuto = $PrecioMinutoUnitario["Precio"];
                 if($Saldo >= $PrecioMinuto){
                     $Minutos = $Saldo / $PrecioMinuto;
                     $Segundos = round($Minutos * 60);
