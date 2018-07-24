@@ -7,11 +7,8 @@
 
         public $Link;
 
-        public $CrearLog;
         // The database connection
         protected static $connection;
-        protected static $connectionDiscador;
-        protected static $connectionDiscadorAsterisk;
 
         /**
          * Connect to the database
@@ -26,19 +23,6 @@
                 $this->Pass = $Conf["passDB"];
                 $this->User = $Conf["userDB"];
                 $this->Database = $Conf["DB"];
-            }
-            else if($Link == "discador"){
-                $this->Server = $Conf["serverDB_discador"];
-                $this->Pass = $Conf["passDB_discador"];
-                $this->User = $Conf["userDB_discador"];
-                $this->Database = $Conf["DB_discador"];
-            }
-            else if($Link == "asterisk"){
-                $this->Server = $Conf["serverDB_discador_asterisk"];
-                $this->Pass = $Conf["passDB_discador_asterisk"];
-                $this->User = $Conf["userDB_discador_asterisk"];
-                $this->Database = $Conf["DB_discador_asterisk"];
-                
             }
             if (!isset($_SESSION)){
                 session_start();
@@ -63,44 +47,6 @@
                         $ToReturn = false;
                     }
                     $ToReturn = self::$connection;
-                break;
-                case "discador":
-                    // Try and connect to the database
-                    if(!isset(self::$connectionDiscador)) {
-                        self::$connectionDiscador = mysqli_connect($this->Server,$this->User,$this->Pass);
-                        mysqli_select_db(self::$connectionDiscador, $this->Database);
-                        $this->query("SET NAMES 'utf8'");
-                    }
-
-                    // If connection was not successful, handle the error
-                    if(self::$connectionDiscador === false) {
-                        // Handle error - notify administrator, log to a file, show an error screen, etc.
-                        $ToReturn = false;
-                    }
-                    if($ToReturn !== false){
-
-                    }
-                    $ToReturn = self::$connectionDiscador;
-                break;
-                case "asterisk":
-                    // Try and connect to the database
-                    if(!isset(self::$connectionDiscadorAsterisk)) {
-                        self::$connectionDiscadorAsterisk = mysqli_connect($this->Server,$this->User,$this->Pass);
-                        mysqli_select_db(self::$connectionDiscadorAsterisk, $this->Database);
-                        $this->query("SET NAMES 'utf8'");
-                    }
-
-                    // If connection was not successful, handle the error
-                    if(self::$connectionDiscadorAsterisk === false) {
-                        // Handle error - notify administrator, log to a file, show an error screen, etc.
-                        $ToReturn = false;
-                    }
-                    if($ToReturn !== false){
-                        echo "NOT CONNECTED";
-                    }else{
-                        echo "CONNECTED";
-                    }
-                    $ToReturn = self::$connectionDiscadorAsterisk;
                 break;
             }
             return $ToReturn;
