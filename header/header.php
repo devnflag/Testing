@@ -288,9 +288,8 @@
                         </div>
 
                         <div class="dropdown-menu">
-                            <a class="dropdown-item" href="">View Profile</a>
-                            <a class="dropdown-item" href="">Settings</a>
-                            <a class="dropdown-item" href="../logout.php">Logout</a>
+                            <a class="dropdown-item" href="../cuenta/perfil.php">Perfil</a>
+                            <a class="dropdown-item" href="../logout.php">Salir</a>
                         </div>
                     </div>
 
