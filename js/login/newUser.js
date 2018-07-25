@@ -47,8 +47,12 @@ $(document).ready(function(){
                 Mail: Mail,
                 Address: Address,
             },
-            async: false,
+            beforeSend: function(){
+				$(".page-loader").addClass("ActiveLoader");
+            },
+            //async: false,
             success: function(data){
+                $(".page-loader").removeClass("ActiveLoader");
                 console.log(data);
                 if(isJson(data)){
                     var Json = JSON.parse(data);

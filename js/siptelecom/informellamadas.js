@@ -18,8 +18,12 @@ $(document).ready(function(){
             data: { 
                 Periodo: Periodo
             },
-            async: false,
+            beforeSend: function(){
+				$(".page-loader").addClass("ActiveLoader");
+            },
+            //async: false,
             success: function(data){
+                $(".page-loader").removeClass("ActiveLoader");
                 if(isJson(data)){
                     DataTable = JSON.parse(data);
                     updateTable();
@@ -34,7 +38,6 @@ $(document).ready(function(){
             type: "POST",
             url: "../includes/siptelecom/getLastSixMonths.php",
             data: {},
-            async: false,
             success: function(data){
                 console.log(data);
                 $("select[name='Periodo']").html(data);

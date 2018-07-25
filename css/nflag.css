@@ -32,3 +32,9 @@ body{
 .login__block{
     background-color: #064780 !important;
 }
+.ActiveLoader{
+    display: block !important;
+}
+.ActiveLoader .page-loader__spinner {
+    margin: calc(50vh - (50px / 2)) calc(50vw - (50px / 2));
+}

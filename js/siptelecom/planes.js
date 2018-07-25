@@ -30,8 +30,12 @@ $(document).ready(function(){
             data: { 
                 idPlan: idPlan
             },
-            async: false,
+            beforeSend: function(){
+				$(".page-loader").addClass("ActiveLoader");
+            },
+            //async: false,
             success: function(data){
+                $(".page-loader").removeClass("ActiveLoader");
                 if(isJson(data)){
                     var Json = JSON.parse(data);
                     if(Json.result){

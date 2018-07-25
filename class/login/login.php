@@ -110,5 +110,17 @@
             $ToReturn["Avatar"] = "";
             return $ToReturn;
         }
+        function getUserByMail($Mail){
+            $db = new DB();
+            $ToReturn = array();
+            $ToReturn["result"] = false;
+            $SqlUsuario = "select * from usuarios where correo='".$Mail."'";
+            $Usuario = $db->select($SqlUsuario);
+            if(count($Usuario) > 0){
+                $ToReturn["Data"] = $Usuario[0];
+                $ToReturn["result"] = true;
+            }
+            return $ToReturn;
+        }
     }
 ?>

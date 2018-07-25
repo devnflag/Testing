@@ -1,19 +1,16 @@
 $(document).ready(function(){
 
-    $("button[name='btnLogin']").click(function(){
-        var User = $("input[name='User']").val();
-        var Password = $("input[name='Password']").val();
-        Login(User,Password);
+    $("button[name='btnRecuperar']").click(function(){
+        var Mail = $("input[name='Mail']").val();
+        Recuperar(Mail);
     });
 
-
-    function Login(User,Password){
+    function Recuperar(Mail){
         $.ajax({
             type: "POST",
-            url: "includes/login/getUserMatch.php",
+            url: "../includes/login/recuperarContrasena.php",
             data: { 
-                User: User,
-                Password: Password
+                Mail: Mail
             },
             beforeSend: function(){
 				$(".page-loader").addClass("ActiveLoader");
@@ -25,7 +22,7 @@ $(document).ready(function(){
                 if(Json.result){
                     swal({
                         title: '¡Bienvenido!',
-                        text: 'Ha iniciado sesion satisfactoriamente.',
+                        text: 'Ha recuperado su contraseña satisfactoriamente.',
                         type: 'success',
                         timer: 2000,
                         buttonsStyling: false,
@@ -34,12 +31,12 @@ $(document).ready(function(){
                         confirmButtonClass: 'btn btn-sm btn-light',
                         background: 'rgba(0, 0, 0, 0.96)'
                     }).then(function(){
-                        location.reload();
+                        window.location = "../index.php";
                     });
                 }else{
                     swal({
                         title: '¡Error!',
-                        text: 'Usuario o Contraseña incorrecta.',
+                        text: Json.Message,
                         type: 'warning',
                         timer: 2000,
                         buttonsStyling: false,
