@@ -16,6 +16,7 @@
 
                                 $Saldo = number_format($SipTelecomClass->getSaldo($_SESSION["userID"]), 2, ',', '.');
                                 $Plan = $SipTelecomClass->getPlanActivado($_SESSION["userID"]);
+                                $PrecioMinutoUnitario = $SipTelecomClass->getPrecioPorMinutoUnitario();
                                 if(count($Plan) > 0){
                                     $Plan = $Plan[0];
                                     $SegundosRestantes = $SipTelecomClass->getSegundosRestantes($_SESSION["userID"]);
@@ -44,11 +45,21 @@
                                                 <h4 class="card-title"><?php echo $nombreServicio; ?></h4>
                                                 <h6 class="card-subtitle"><?php echo $descripcionServicio; ?></h6>
 
-                                                <div class="row">
-                                                    <div class="col-sm-3">
+                                                <div class="row" style="margin-bottom: 25px;">
+                                                    <div class="col-sm-3"></div>
+                                                    <div class="col-sm-6">
                                                         <div class="invoice__attrs__item">
                                                             <small>Saldo</small>
                                                             <h3>$ <?php echo $Saldo; ?></h3>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-sm-3"></div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-sm-3">
+                                                        <div class="invoice__attrs__item">
+                                                            <small>Precio por Minuto</small>
+                                                            <h3>$ <?php echo $PrecioMinutoUnitario; ?></h3>
                                                         </div>
                                                     </div>
                                                     <div class="col-sm-3">

@@ -170,5 +170,15 @@
                 $DeletePlan = $db->query($SqlDeletePlan);    
             }
         }
+        function getPrecioPorMinutoUnitario(){
+            $db = new DB();
+            $ToReturn = "0";
+            $SqlPrecio = "SELECT precioUnitarioMinuto as Precio FROM config_sipTelecom";
+            $Precio = $db->select($SqlPrecio);
+            if(count($Precio) > 0){
+                $ToReturn = $Precio[0]["Precio"];
+            }
+            return $ToReturn;
+        }
     }
 ?>
