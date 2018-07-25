@@ -11,14 +11,14 @@
     
     $NoSaldo = false;
     
-    $SqlTiempo = "SELECT DST.minutos as Minutos, (DST.minutos * 60) as Segundos, DST.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='".$Anexo."'";
+    //$SqlTiempo = "SELECT DST.minutos as Minutos, (DST.minutos * 60) as Segundos, DST.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='".$Anexo."'";
+    $SqlTiempo = "SELECT DST.segundos as Segundos, DST.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='".$Anexo."'";
     $Tiempo = $Connection->query($SqlTiempo);
     if(count($Tiempo) > 0){
         foreach($Tiempo as $T){
             $Saldo = $T["Saldo"];
-            $Minutos = $T["Minutos"];
-            if($Minutos > 0){
-                $Segundos = round($T["Segundos"]);
+            $Segundos = $T["Segundos"];
+            if($Segundos > 0){
                 $agi->set_variable(test,$Segundos);
                 if($Segundos > 0){
                     $agi->set_variable(TimeOut,$Segundos);
@@ -33,7 +33,7 @@
                     $PrecioMinuto = $PrecioUnitario["Precio"];
                     if($Saldo >= $PrecioMinuto){
                         $Minutos = $Saldo / $PrecioMinuto;
-                        $Segundos = round($Minutos * 60);
+                        $Segundos = $Minutos * 60;
                         $agi->set_variable(test,$Segundos);
                         if($Segundos > 0){
                             $agi->set_variable(TimeOut,$Segundos);

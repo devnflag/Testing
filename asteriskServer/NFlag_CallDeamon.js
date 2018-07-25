@@ -52,23 +52,22 @@ db.connect(function(err) {
             console.log(evt);
             var Duration = evt.BillableSeconds;
             var Extension = evt.Source;
-            db.query("SELECT DST.minutos as Minutos, (DST.minutos * 60) as Segundos, Us.id as idUsuario, DST.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='"+Extension+"'", function (err, recordset) {
+            //db.query("SELECT DST.minutos as Minutos, (DST.minutos * 60) as Segundos, Us.id as idUsuario, DST.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='"+Extension+"'", function (err, recordset) {
+            db.query("SELECT DST.segundos as Segundos, Us.id as idUsuario, DST.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='"+Extension+"'", function (err, recordset) {
                 recordset = JSON.parse(JSON.stringify(recordset));
                 if (err){
                 }else{
-                    var MinutosActuales = recordset[0]["Minutos"];
+                    var SegundosActuales = recordset[0]["Segundos"];
                     var SaldoActual = recordset[0]["Saldo"];
                     var idUsuario = recordset[0]["idUsuario"];
-                    if(MinutosActuales > 0){
-                        var Segundos = recordset[0]["Segundos"];
+                    if(SegundosActuales > 0){
+                        var Segundos = SegundosActuales;
                         Segundos -= Duration;
-                        var Minutos = (Segundos / 60);
-                        Minutos = Minutos.toFixed(1);
-                        console.log("UPDATE data_sipTelecom SET minutos = '"+Minutos+"' where idUsuario='"+idUsuario+"'");
-                        db.query("UPDATE data_sipTelecom SET minutos = '"+Minutos+"' where idUsuario='"+idUsuario+"'", function (err, recordset) {
+                        console.log("UPDATE data_sipTelecom SET segundos = '"+Segundos+"' where idUsuario='"+idUsuario+"'");
+                        db.query("UPDATE data_sipTelecom SET segundos = '"+Segundos+"' where idUsuario='"+idUsuario+"'", function (err, recordset) {
                             //console.log(recordset);
                             if (!err) {
-                                if(Minutos <= 0){
+                                if(Segundos <= 0){
                                     db.query("DELETE FROM usuarios_planes_sipTelecom where idUsuario='"+idUsuario+"'", function (err, recordset) {
                                         //console.log(recordset);
                                         if (!err) {

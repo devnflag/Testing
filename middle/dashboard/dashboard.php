@@ -18,8 +18,10 @@
                                 $Plan = $SipTelecomClass->getPlanActivado($_SESSION["userID"]);
                                 if(count($Plan) > 0){
                                     $Plan = $Plan[0];
-                                    $MinutosRestantes = $SipTelecomClass->getMinutosRestantes($_SESSION["userID"]);
-                                    $MinutosUtilizados = number_format(($Plan["cantidadMinutos"] - $MinutosRestantes),1,',','.');
+                                    $SegundosRestantes = $SipTelecomClass->getSegundosRestantes($_SESSION["userID"]);
+                                    $MinutosRestantes = conversorSegundosHoras($SegundosRestantes);
+                                    $SegundosUtilizados = ($Plan["cantidadMinutos"] * 60) - $SegundosRestantes;
+                                    $MinutosUtilizados = conversorSegundosHoras($SegundosUtilizados);
                                     $NombrePlan = $Plan["nombre"];
                                     $fechaActivacion = $Plan["fechaActivacion"];
                                     $fechaCulminacion = $Plan["fechaCulminacion"];
@@ -100,5 +102,15 @@
                                 <?php
                             break;
                         }
+                    }
+                    function conversorSegundosHoras($tiempo_en_segundos) {
+                        $horas = floor($tiempo_en_segundos / 3600);
+                        $horas = $horas >= 10 ? $horas : "0".$horas;
+                        $minutos = floor(($tiempo_en_segundos - ($horas * 3600)) / 60);
+                        $minutos = $minutos >= 10 ? $minutos : "0".$minutos;
+                        $segundos = $tiempo_en_segundos - ($horas * 3600) - ($minutos * 60);
+                        $segundos = $segundos >= 10 ? $segundos : "0".$segundos;
+                    
+                        return $horas . ':' . $minutos . ":" . $segundos;
                     }
                 ?>

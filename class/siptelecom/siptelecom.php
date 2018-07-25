@@ -5,7 +5,7 @@
             $db = new DB();
             $ToReturn = array();
             $ToReturn["result"] = false;
-            $SqlInsert = "insert into data_sipTelecom (idUsuario,minutos) values('".$idUsuario."','0')";
+            $SqlInsert = "insert into data_sipTelecom (idUsuario,segundos) values('".$idUsuario."','0')";
             $Insert = $db->query($SqlInsert);
             if($Insert){
                 $ToReturn["result"] = true;
@@ -26,16 +26,16 @@
             $SqlUpdate = "update data_sipTelecom set saldo='".$SaldoFinal."' where idUsuario='".$idUsuario."'";
             $Update = $db->query($SqlUpdate);
         }
-        function updateMinutos($idUsuario,$Minutos){
+        function updateSegundos($idUsuario,$Segundos){
             $db = new DB();            
-            $SqlUpdate = "update data_sipTelecom set minutos='".$Minutos."' where idUsuario='".$idUsuario."'";
+            $SqlUpdate = "update data_sipTelecom set segundos='".$Segundos."' where idUsuario='".$idUsuario."'";
             $Update = $db->query($SqlUpdate);
         }
-        function getMinutosRestantes($idUsuario){
+        function getSegundosRestantes($idUsuario){
             $db = new DB();
-            $SqlSaldo = "select minutos from data_sipTelecom where idUsuario = '".$idUsuario."'";
+            $SqlSaldo = "select segundos from data_sipTelecom where idUsuario = '".$idUsuario."'";
             $Saldo = $db->select($SqlSaldo);
-            return $Saldo[0]["minutos"];
+            return $Saldo[0]["segundos"];
         }
         function getPlanActivado($idUsuario){
             $db = new DB();
@@ -144,7 +144,7 @@
                         $Insert = $db->query($SqlInsert);
                         if($Insert){
                             $this->updateSaldo($idUsuario,$Precio);
-                            $this->updateMinutos($idUsuario,$Plan["cantidadMinutos"]);
+                            $this->updateSegundos($idUsuario,($Plan["cantidadMinutos"] * 60));
                             $ToReturn["result"] = true;
                             $ToReturn["Plan"] = $Plan["nombre"];
                             $ToReturn["Minutos"] = $Plan["cantidadMinutos"];
@@ -163,9 +163,9 @@
         }
         function eliminarBolsasVencimiento($Date){
             $db = new DB();
-            $SqlUpdateMinutos = "update data_sipTelecom set minutos = 0 where idUsuario in (select idUsuario from usuarios_planes_sipTelecom where ADDDATE(fechaCulminacion, INTERVAL 1 DAY) <= '".$Date."')";
-            $UpdateMinutos = $db->query($SqlUpdateMinutos);
-            if($UpdateMinutos){
+            $SqlUpdateSegundos = "update data_sipTelecom set segundos = 0 where idUsuario in (select idUsuario from usuarios_planes_sipTelecom where ADDDATE(fechaCulminacion, INTERVAL 1 DAY) <= '".$Date."')";
+            $UpdateSegundos = $db->query($SqlUpdateSegundos);
+            if($UpdateSegundos){
                 $SqlDeletePlan = "DELETE from usuarios_planes_sipTelecom where ADDDATE(fechaCulminacion, INTERVAL 1 DAY) <= '".$Date."'";
                 $DeletePlan = $db->query($SqlDeletePlan);    
             }
