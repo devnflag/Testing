@@ -32,11 +32,15 @@
                                             </tr>
                                             <tr>
                                                 <td>BANCO</td>
-                                                <td>BANCO SANTANDER</td>
+                                                <td>ITAU</td>
                                             </tr>
                                             <tr>
                                                 <td>TIPO DE CUENTA</td>
                                                 <td>CORRIENTE</td>
+                                            </tr>
+                                            <tr>
+                                                <td>NUMERO DE CUENTA</td>
+                                                <td>0213335996</td>
                                             </tr>
                                             <tr>
                                                 <td>E-MAIL</td>
