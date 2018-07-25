@@ -1,6 +1,6 @@
                 <header class="content__title">
                     <h1>Servicios</h1>
-                    <small>Welcome to the unique SuperAdmin web app experience!</small>
+                    <small>Resumen de Cuenta.</small>
                 </header>
                 
                 <?php

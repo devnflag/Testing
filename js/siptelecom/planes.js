@@ -6,13 +6,13 @@ $(document).ready(function(){
         var idPlan = IDArray[1];
         var Precio = IDArray[0];
         swal({
-            title: '¿Esta seguro de contartar la bolsa seleccionada?',
+            title: '¿Esta seguro de contratar la bolsa seleccionada?',
             text: 'Se le hara un recargo a su cuenta de ' + Precio,
             type: 'warning',
             showCancelButton: true,
             buttonsStyling: false,
             confirmButtonClass: 'btn btn-success',
-            confirmButtonText: 'De Acuerdo',
+            confirmButtonText: 'Aceptar',
             cancelButtonClass: 'btn btn-light',
             cancelButtonText: 'Cancelar',
             background: 'rgba(0, 0, 0, 0.96)'
@@ -36,7 +36,7 @@ $(document).ready(function(){
                     var Json = JSON.parse(data);
                     if(Json.result){
                         swal({
-                            title: '¡Plan Contartado!',
+                            title: '¡Plan Contratado!',
                             text: 'Ha contratado el plan "' + Json.Plan + '" el cual cuenta con ' + Json.Minutos + ' minutos y vencen en ' + Json.TiempoVencimiento,
                             type: 'success',
                             buttonsStyling: false,

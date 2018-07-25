@@ -2,6 +2,9 @@
     class Mail{
 
         function sendMailNewUser($Mail,$FullName,$Password){
+            $Contenido = $this->SingUpContentMail($Mail,$Password);
+            $Contenido = html_entity_decode(preg_replace('~&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', $Contenido), ENT_QUOTES, 'UTF-8');
+            $Contenido = iconv('UTF-8', 'ISO-8859-1//TRANSLIT//IGNORE', $Contenido);
             $mail = new PHPMailer();
             $mail->IsSMTP();
 			$mail->SMTPAuth = true;
@@ -23,7 +26,7 @@
             $mail->FromName = "NFLAG";
             $mail->Subject = "Bienvenid@ a NFLAG";
             $mail->IsHTML(true);
-            $mail->MsgHTML($this->SingUpContentMail($Mail,$Password));
+            $mail->MsgHTML($Contenido);
             $mail->AddAddress($Mail);   
             if(!$mail->Send()){   
                 echo "Error al enviar, causa: " .$mail->ErrorInfo;  
@@ -376,14 +379,14 @@
                             color: #fff;
                             font-family: Arial;
                             font-size: 15px;">
-                        <a href="" target="_blank" style="
+                        <a href="http://app.nflag.io" target="_blank" style="
                              text-align: center;
                              text-decoration: none;
                              display: block;
                              color: #fff;
                              font-family: Arial;
                              font-size: 15px;">
-                          <span style="margin: 0px;">Click Me</span>
+                          <span style="margin: 0px;">Iniciar Sesión</span>
                         </a>
                       </td>
                     </tr>

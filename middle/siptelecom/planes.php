@@ -34,7 +34,7 @@
                                                 }
                                             ?>
                                         </ul>
-                                        <a id="<?php echo "$ ". number_format($Plan["precio"],0,',','.')."_".$Plan["id"]; ?>" class="select_plan price-table__action">Select Plan</a>
+                                        <a id="<?php echo "$ ". number_format($Plan["precio"],0,',','.')."_".$Plan["id"]; ?>" class="select_plan price-table__action">CONTRATAR</a>
                                     </div>
                                 </div>
                             <?php
