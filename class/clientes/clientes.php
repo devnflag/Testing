@@ -1,7 +1,7 @@
 <?php
     class Clientes{
 
-        function addCliente($FullName,$DNI,$Mail,$Address,$Rol){
+        function addCliente($FullName,$DNI,$Mail,$Address){
             $db = new DB();
             $ServiciosClass = new Servicios();
             $ToReturn = false;

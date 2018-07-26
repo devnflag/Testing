@@ -33,7 +33,7 @@
             }
             return $ToReturn;
         }
-        function newUser($FullName,$DNI,$Mail,$Address,$Rol,$Password){
+        function newUser($FullName,$DNI,$Mail,$Address,$idServicio,$Password){
             $db = new DB();
             $ClientesClass = new Clientes();
             $ExtensionesClass = new Extensiones();
@@ -43,13 +43,13 @@
             $ToReturn = array();
             $ToReturn["result"] = false;
             
-            $InsertCliente = $ClientesClass->addCliente($FullName,$DNI,$Mail,$Address,$Rol);
+            $InsertCliente = $ClientesClass->addCliente($FullName,$DNI,$Mail,$Address);
             if($InsertCliente){
                 $Cliente = $ClientesClass->getClienteByMail($Mail);
                 if($Cliente["result"]){
                     $Cliente = $Cliente["Data"];
                     $idCliente = $Cliente["id"];
-                    $InsertUsuario = $this->addUser($Mail,$Password,$FullName,$Mail,$Rol,$idCliente);
+                    $InsertUsuario = $this->addUser($Mail,$Password,$FullName,$Mail,$idServicio,$idCliente);
                     if($InsertUsuario){
                         $Usuario = $this->getUserByUserName($Mail);
                         if($Usuario["result"]){
@@ -68,10 +68,10 @@
             }
             return $ToReturn;
         }
-        function addUser($Username,$Password,$Nombre,$Mail,$Rol,$idCliente){
+        function addUser($Username,$Password,$Nombre,$Mail,$idServicio,$idCliente){
             $db = new DB();
             $ToReturn = false;
-            $SqlInsertUser = "insert into usuarios (nombreUsuario,claveUsuario,nombre,correo,idRol,fechaCreacion) values('".$Username."','".$Password."','".$Nombre."','".$Mail."','".$Rol."',NOW())";
+            $SqlInsertUser = "insert into usuarios (nombreUsuario,claveUsuario,nombre,correo,idServicio,fechaCreacion) values('".$Username."','".$Password."','".$Nombre."','".$Mail."','".$idServicio."',NOW())";
             $InsertUser = $db->query($SqlInsertUser);
             if($InsertUser){
                 $Usuario = $this->getUserByUserName($Username);

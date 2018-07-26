@@ -20,7 +20,7 @@
     
     $MailExist = $LoginClass->MailExist($Mail);
     if(!$MailExist["result"]){
-        $ToReturn = $LoginClass->newUser($FullName,$DNI,$Mail,$Address,'1',$Password);
+        $ToReturn = $LoginClass->newUser($FullName,$DNI,$Mail,$Address,'2',$Password);
         if($ToReturn["result"]){
             $MailClass = new Mail();
             $MailClass->sendMailNewUser($Mail,$FullName,$Password);
