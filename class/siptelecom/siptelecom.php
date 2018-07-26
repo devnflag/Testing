@@ -73,7 +73,7 @@
             $db = new DB();
             $Extension = $this->getExtension($_SESSION["userID"]);
             //$SqlCalls = "SELECT DISTINCT calldate as FechaHora, dst as NumeroDestino, billsec as Duraccion, disposition as Accion from cdr where SRC = '".$Extension."' AND MONTH(calldate)='".$Month."' AND YEAR(calldate)='".$Year."' ORDER BY calldate DESC";
-            $SqlCalls = "SELECT calldate as FechaHora, dst as NumeroDestino, billsec as Duraccion, disposition as Accion FROM cdr WHERE src = '".$Extension."' AND MONTH(calldate)='".$Month."' AND YEAR(calldate)='".$Year."' GROUP BY uniqueid ORDER BY billsec DESC";
+            $SqlCalls = "SELECT calldate as FechaHora, dst as NumeroDestino, SEC_TO_TIME(billsec) as Duraccion, disposition as Accion FROM cdr WHERE src = '".$Extension."' AND MONTH(calldate)='".$Month."' AND YEAR(calldate)='".$Year."' GROUP BY uniqueid ORDER BY billsec DESC";
             $Calls = $db->select($SqlCalls);
             return $Calls;
         }
@@ -179,6 +179,16 @@
                 $ToReturn = $Precio[0]["Precio"];
             }
             return $ToReturn;
+        }
+        function conversorSegundosHoras($tiempo_en_segundos) {
+            $horas = floor($tiempo_en_segundos / 3600);
+            $horas = $horas >= 10 ? $horas : "0".$horas;
+            $minutos = floor(($tiempo_en_segundos - ($horas * 3600)) / 60);
+            $minutos = $minutos >= 10 ? $minutos : "0".$minutos;
+            $segundos = $tiempo_en_segundos - ($horas * 3600) - ($minutos * 60);
+            $segundos = $segundos >= 10 ? $segundos : "0".$segundos;
+        
+            return $horas . ':' . $minutos . ":" . $segundos;
         }
     }
 ?>
