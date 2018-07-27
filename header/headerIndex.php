@@ -9,6 +9,7 @@
     include_once("class/siptelecom/siptelecom.php");
     include_once("class/extensiones/extensiones.php");
     include_once("class/globals/globals.php");
+    include_once("class/centraltelecom/centraltelecom.php");
     $MenuClass = new Menu();
     $LoginClass = new Login();
     $GlobalsClass = new Globals();

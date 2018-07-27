@@ -1,6 +1,7 @@
 <?php
     include_once("../../class/db/db.php");
     include_once("../../class/login/login.php");
+    include_once("../../class/clientes/clientes.php");
     
     $LoginClass = new Login();
 

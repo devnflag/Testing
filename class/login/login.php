@@ -15,8 +15,15 @@
                 $SqlPasswordMatch = "select * from usuarios where id='".$userID."' and claveUsuario='".$Password."'";
                 $PasswordMatch = $db->select($SqlPasswordMatch);
                 if(count($PasswordMatch) > 0){
-                    $ToReturn["result"] = true;
-                    $_SESSION["userID"] = $userID;
+                    $ClientesClass = new Clientes();
+                    $Cliente = $ClientesClass->getClienteByUsuario($userID);
+                    if($Cliente["result"]){
+                        $Cliente = $Cliente["Data"];
+                        $idCliente = $Cliente["id"];
+                        $ToReturn["result"] = true;
+                        $_SESSION["userID"] = $userID;
+                        $_SESSION["idCliente"] = $idCliente;
+                    }
                 }
             }
             return $ToReturn;
@@ -50,7 +57,7 @@
                     $Cliente = $Cliente["Data"];
                     $idCliente = $Cliente["id"];
                     $InsertUsuario = $this->addUser($Mail,$Password,$FullName,$Mail,$idServicio,$idCliente);
-                    if($InsertUsuario){
+                    if($InsertUsuario["result"]){
                         $Usuario = $this->getUserByUserName($Mail);
                         if($Usuario["result"]){
                             $Usuario = $Usuario["Data"];
@@ -70,11 +77,12 @@
         }
         function addUser($Username,$Password,$Nombre,$Mail,$idServicio,$idCliente){
             $db = new DB();
-            $ToReturn = false;
+            $ToReturn = array();
+            $ToReturn["result"] = false;
             $SqlInsertUser = "insert into usuarios (nombreUsuario,claveUsuario,nombre,correo,idServicio,fechaCreacion) values('".$Username."','".$Password."','".$Nombre."','".$Mail."','".$idServicio."',NOW())";
             $InsertUser = $db->query($SqlInsertUser);
             if($InsertUser){
-                $Usuario = $this->getUserByUserName($Username);
+                /* $Usuario = $this->getUserByUserName($Username);
                 if($Usuario["result"]){
                     $Usuario = $Usuario["Data"];
                     $idUsuario = $Usuario["id"];
@@ -83,6 +91,13 @@
                     if($InsertClienteUSuario){
                         $ToReturn = true;
                     }
+                } */
+                $idUsuario = $db->getLastID();
+                $SqlInsertClienteUsuario = "insert into clientes_usuarios (idCliente,idUsuario) values('".$idCliente."','".$idUsuario."')";
+                $InsertClienteUSuario = $db->query($SqlInsertClienteUsuario);
+                if($InsertClienteUSuario){
+                    $ToReturn["result"] = true;
+                    $ToReturn["idUsuario"] = $idUsuario;
                 }
             }
             return $ToReturn;

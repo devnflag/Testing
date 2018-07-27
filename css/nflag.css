@@ -11,12 +11,9 @@ body{
 .card{
     background-color: #064780 !important;
 }
-.card .card {
-    background-color: #053966 !important;
-}
-.content__title>h1{
-    color: #064780 !important;
-}
+    .card .card {
+        background-color: #053966 !important;
+    }
 .content__title>h1{
     color: #064780 !important;
 }
@@ -38,3 +35,50 @@ body{
 .ActiveLoader .page-loader__spinner {
     margin: calc(50vh - (50px / 2)) calc(50vw - (50px / 2));
 }
+button{
+    cursor: pointer;
+}
+.modal-content {
+    color: #064780 !important;
+    font-size: 15px;
+}
+    .modal-content .modal-header{
+        background-color: #064780 !important;
+        padding: 10px 10px;
+    }
+.groupsExtensions {
+    width: 100%;
+    overflow: hidden;
+}
+    .groupsExtensions .Extension{
+        width: calc(calc(100% / 4) - 40px);
+        background-color: rgba(0,0,0,.2);
+        padding: 15px 20px;
+        float: left;
+        margin: 10px 20px;
+        position: relative;
+    }
+        .groupsExtensions .Extension .nombreExtension{
+            text-align: center;
+            font-size: 17px;
+            margin-bottom: 5px;
+        }
+        .groupsExtensions .Extension .groupExtension {
+            width: 100%;
+            overflow: hidden;
+        }
+            .groupsExtensions .Extension .groupExtension .miniGroup{
+                width: calc(calc(100% / 2) - 20px);
+                float: left;
+                text-align: center;
+                background-color: rgba(0,0,0,0.2);
+                margin: 5px 10px;
+                padding: 5px 10px;
+            }
+                .groupsExtensions .Extension .groupExtension .miniGroup .text{
+                    font-weight: bold;
+                }
+        .groupsExtensions .Extension .actions {
+            top: 5px !important;
+            right: 5px !important;
+        }

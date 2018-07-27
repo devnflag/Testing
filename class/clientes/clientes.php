@@ -35,5 +35,17 @@
             }
             return $ToReturn;
         }
+        function getClienteByUsuario($idUsuario){
+            $db = new DB();
+            $ToReturn = array();
+            $ToReturn["result"] = false;
+            $SqlCliente = "select * from clientes C inner join clientes_usuarios CU on CU.idCliente = C.id where CU.idUsuario='".$idUsuario."'";
+            $Cliente = $db->select($SqlCliente);
+            if(count($Cliente) > 0){
+                $ToReturn["Data"] = $Cliente[0];
+                $ToReturn["result"] = true;
+            }
+            return $ToReturn;
+        }
     }
 ?>
