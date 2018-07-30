@@ -47,5 +47,19 @@
             }
             return $ToReturn;
         }
+        function getSaldo($idUsuario){
+            $db = new DB();
+            $SqlSaldo = "select saldo from clientes C inner join clientes_usuarios CU on CU.idCliente = C.id where CU.idUsuario = '".$idUsuario."'";
+            $Saldo = $db->select($SqlSaldo);
+            return $Saldo[0]["saldo"];
+        }
+        function updateSaldo($idUsuario,$Precio){
+            $db = new DB();
+            $Saldo = $this->getSaldo($idUsuario);
+            $SaldoFinal = $Saldo - $Precio;
+            
+            $SqlUpdate = "update clientes set saldo='".$SaldoFinal."' where id in (select idCliente from clientes_usuarios where idUsuario='".$idUsuario."')";
+            $Update = $db->query($SqlUpdate);
+        }
     }
 ?>

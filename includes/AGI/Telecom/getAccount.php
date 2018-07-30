@@ -12,7 +12,8 @@
     $NoSaldo = false;
     
     //$SqlTiempo = "SELECT DST.minutos as Minutos, (DST.minutos * 60) as Segundos, DST.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='".$Anexo."'";
-    $SqlTiempo = "SELECT DST.segundos as Segundos, DST.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='".$Anexo."'";
+    //$SqlTiempo = "SELECT DST.segundos as Segundos, DST.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='".$Anexo."'";
+    $SqlTiempo = "SELECT DST.segundos as Segundos, C.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id INNER JOIN clientes_usuarios CU on CU.idUsuario = Us.id INNER JOIN clientes C on C.id = CU.idCliente WHERE Ex.Extension='".$Anexo."'";
     $Tiempo = $Connection->query($SqlTiempo);
     if(count($Tiempo) > 0){
         foreach($Tiempo as $T){

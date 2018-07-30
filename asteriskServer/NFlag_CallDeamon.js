@@ -53,13 +53,15 @@ db.connect(function(err) {
             var Duration = evt.BillableSeconds;
             var Extension = evt.Source;
             //db.query("SELECT DST.minutos as Minutos, (DST.minutos * 60) as Segundos, Us.id as idUsuario, DST.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='"+Extension+"'", function (err, recordset) {
-            db.query("SELECT DST.segundos as Segundos, Us.id as idUsuario, DST.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='"+Extension+"'", function (err, recordset) {
+            //db.query("SELECT DST.segundos as Segundos, Us.id as idUsuario, DST.saldo as Saldo FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id WHERE Ex.Extension='"+Extension+"'", function (err, recordset) {
+            db.query("SELECT DST.segundos as Segundos, Us.id as idUsuario,C.saldo as Saldo, C.id as idCliente FROM Extensiones Ex INNER JOIN usuarios Us on Us.id = Ex.idUsuario INNER JOIN data_sipTelecom DST on DST.idUsuario = Us.id INNER JOIN clientes_usuarios CU on CU.idUsuario = Us.id INNER JOIN clientes C on C.id = CU.idCliente WHERE Ex.Extension='"+Extension+"'", function (err, recordset) {
                 recordset = JSON.parse(JSON.stringify(recordset));
                 if (err){
                 }else{
                     var SegundosActuales = recordset[0]["Segundos"];
                     var SaldoActual = recordset[0]["Saldo"];
                     var idUsuario = recordset[0]["idUsuario"];
+                    var idCliente = recordset[0]["idCliente"];
                     if(SegundosActuales > 0){
                         var Segundos = SegundosActuales;
                         Segundos -= Duration;
@@ -85,8 +87,8 @@ db.connect(function(err) {
                                 var PrecioUnitario = recordset[0]["Precio"];
                                 var Minutos = (Duration / 60);
                                 var Saldo = SaldoActual - (Minutos * PrecioUnitario);
-                                console.log("UPDATE data_sipTelecom SET saldo = '"+Saldo+"' where idUsuario='"+idUsuario+"'");
-                                db.query("UPDATE data_sipTelecom SET saldo = '"+Saldo+"' where idUsuario='"+idUsuario+"'", function (err, recordset) {
+                                console.log("UPDATE clientes SET saldo = '"+Saldo+"' where idCliente='"+idCliente+"'");
+                                db.query("UPDATE clientes SET saldo = '"+Saldo+"' where idCliente='"+idCliente+"'", function (err, recordset) {
                                     //console.log(recordset);
                                     if (!err) {
 

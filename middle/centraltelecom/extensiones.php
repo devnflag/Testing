@@ -43,8 +43,8 @@
                                                     <i class="zmdi zmdi-more-vert" data-toggle="dropdown"></i>
 
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="">Edit</a>
-                                                        <a class="dropdown-item" href="" data-demo-action="delete-listing">Delete</a>
+                                                        <a class="dropdown-item Update" >Modificar</a>
+                                                        <a class="dropdown-item Delete" >Eliminar</a>
                                                     </div>
                                                 </div>
                                             </div>

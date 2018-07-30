@@ -4,6 +4,12 @@ $(document).ready(function(){
         var nombreExtension = $("input[name='nombreExtension']").val();
         newExtension(nombreExtension);
     });
+    $(".Update").click(function(e){
+        e.preventDefault();
+    });
+    $(".Delete").click(function(e){
+        e.preventDefault();
+    });
 
     function newExtension(nombreExtension){
         $.ajax({
@@ -33,27 +39,10 @@ $(document).ready(function(){
                             buttonsStyling: false,
                             confirmButtonClass: 'btn btn-sm btn-light',
                             background: 'rgba(0, 0, 0, 0.96)'
+                        }).then(function(){
+                            location.reload();
                         });
                     }
-                }
-            },
-            error: function(){
-            }
-        });
-    }
-    function getExtensiones(){
-        $.ajax({
-            type: "POST",
-            url: "../includes/centraltelecom/getExtensiones.php",
-            data: {},
-            beforeSend: function(){
-				$(".page-loader").addClass("ActiveLoader");
-            },
-            //async: false,
-            success: function(data){
-                $(".page-loader").removeClass("ActiveLoader");
-                if(isJson(data)){
-                    
                 }
             },
             error: function(){

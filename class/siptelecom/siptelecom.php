@@ -12,7 +12,7 @@
             }
             return $ToReturn;
         }
-        function getSaldo($idUsuario){
+        /* function getSaldo($idUsuario){
             $db = new DB();
             $SqlSaldo = "select saldo from data_sipTelecom where idUsuario = '".$idUsuario."'";
             $Saldo = $db->select($SqlSaldo);
@@ -25,7 +25,7 @@
             
             $SqlUpdate = "update data_sipTelecom set saldo='".$SaldoFinal."' where idUsuario='".$idUsuario."'";
             $Update = $db->query($SqlUpdate);
-        }
+        } */
         function updateSegundos($idUsuario,$Segundos){
             $db = new DB();            
             $SqlUpdate = "update data_sipTelecom set segundos='".$Segundos."' where idUsuario='".$idUsuario."'";
@@ -33,9 +33,9 @@
         }
         function getSegundosRestantes($idUsuario){
             $db = new DB();
-            $SqlSaldo = "select segundos from data_sipTelecom where idUsuario = '".$idUsuario."'";
-            $Saldo = $db->select($SqlSaldo);
-            return $Saldo[0]["segundos"];
+            $SqlSegundos = "select segundos from data_sipTelecom where idUsuario = '".$idUsuario."'";
+            $Segundos = $db->select($SqlSegundos);
+            return $Segundos[0]["segundos"];
         }
         function getPlanActivado($idUsuario){
             $db = new DB();
@@ -115,11 +115,13 @@
             $ToReturn = array();
             $ToReturn["result"] = false;
 
+            $ClientesClass = new Clientes();
+
             $Plan = $this->getPlan($idPlan);
             if(count($Plan) > 0){
                 $Plan = $Plan[0];
                 $Precio = $Plan["precio"];
-                $SaldoActual = $this->getSaldo($idUsuario);
+                $SaldoActual = $ClientesClass->getSaldo($idUsuario);
                 if($Precio <= $SaldoActual){
                 
                     $modoVencimiento = $Plan["modoVencimiento"];
@@ -143,8 +145,10 @@
                         $SqlInsert = "insert into usuarios_planes_sipTelecom (idUsuario,idPlan,fechaActivacion,fechaCulminacion) values ('".$idUsuario."','".$idPlan."','".$fechaActual."','".$fechaVencimiento."')";
                         $Insert = $db->query($SqlInsert);
                         if($Insert){
-                            $this->updateSaldo($idUsuario,$Precio);
-                            $this->updateSegundos($idUsuario,($Plan["cantidadMinutos"] * 60));
+                            /* $this->updateSaldo($idUsuario,$Precio);
+                            $this->updateSegundos($idUsuario,($Plan["cantidadMinutos"] * 60)); */
+                            $ClientesClass->updateSaldo($idUsuario,$Precio);
+                            $ClientesClass->updateSegundos($idUsuario,($Plan["cantidadMinutos"] * 60));
                             $ToReturn["result"] = true;
                             $ToReturn["Plan"] = $Plan["nombre"];
                             $ToReturn["Minutos"] = $Plan["cantidadMinutos"];

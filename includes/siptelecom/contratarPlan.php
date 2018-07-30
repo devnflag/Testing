@@ -2,6 +2,7 @@
     session_start();
     include_once("../../class/db/db.php");
     include_once("../../class/siptelecom/siptelecom.php");
+    include_once("../../class/clientes/clientes.php");
 
     $idPlan = $_POST["idPlan"];
 

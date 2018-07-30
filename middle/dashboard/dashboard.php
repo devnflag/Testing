@@ -4,6 +4,7 @@
                 </header>
                 
                 <?php
+                    $ClientesClass = new Clientes();
                     $ServiciosClass = new Servicios();
                     $Servicios = $ServiciosClass->getServiciosAsociados();
                     foreach($Servicios as $Servicio){
@@ -14,7 +15,7 @@
                             case "2":
                                 $SipTelecomClass = new SipTelecom();
 
-                                $Saldo = number_format($SipTelecomClass->getSaldo($_SESSION["userID"]), 2, ',', '.');
+                                $Saldo = number_format($ClientesClass->getSaldo($_SESSION["userID"]), 2, ',', '.');
                                 $Plan = $SipTelecomClass->getPlanActivado($_SESSION["userID"]);
                                 $PrecioMinutoUnitario = $SipTelecomClass->getPrecioPorMinutoUnitario();
                                 if(count($Plan) > 0){
