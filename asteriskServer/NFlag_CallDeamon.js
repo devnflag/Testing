@@ -87,8 +87,8 @@ db.connect(function(err) {
                                 var PrecioUnitario = recordset[0]["Precio"];
                                 var Minutos = (Duration / 60);
                                 var Saldo = SaldoActual - (Minutos * PrecioUnitario);
-                                console.log("UPDATE clientes SET saldo = '"+Saldo+"' where idCliente='"+idCliente+"'");
-                                db.query("UPDATE clientes SET saldo = '"+Saldo+"' where idCliente='"+idCliente+"'", function (err, recordset) {
+                                console.log("UPDATE clientes SET saldo = '"+Saldo+"' where id='"+idCliente+"'");
+                                db.query("UPDATE clientes SET saldo = '"+Saldo+"' where id='"+idCliente+"'", function (err, recordset) {
                                     //console.log(recordset);
                                     if (!err) {
 
