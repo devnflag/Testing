@@ -6,9 +6,11 @@ $(document).ready(function(){
     });
     $(".Update").click(function(e){
         e.preventDefault();
+        var Extension = $(this).closest(".Extension").attr("id");
     });
     $(".Delete").click(function(e){
         e.preventDefault();
+        var Extension = $(this).closest(".Extension").attr("id");
     });
 
     function newExtension(nombreExtension){

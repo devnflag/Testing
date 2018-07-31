@@ -16,25 +16,25 @@
                                 $Extensiones = $CentralTelecomClass->getExtensions($_SESSION["idCliente"], $Month, $Year);
                                 foreach($Extensiones as $Extension){
                                     ?>
-                                        <div class="Extension">
-                                            <div class="nombreExtension"><?php echo $Extension["nombreExtension"] ?></div>
+                                        <div class="Extension" id="<?php echo $Extension["Extension"]; ?>">
+                                            <div class="nombreExtension"><?php echo $Extension["nombreExtension"]; ?></div>
                                             <div class="groupExtension">
                                                 <div class="miniGroup">
-                                                    <div class="number"><?php echo $Extension["Extension"] ?></div>
+                                                    <div class="number"><?php echo $Extension["Extension"]; ?></div>
                                                     <div class="text">Extensión</div>
                                                 </div>
                                                 <div class="miniGroup">
-                                                    <div class="number"><?php echo $Extension["Clave"] ?></div>
+                                                    <div class="number"><?php echo $Extension["Clave"]; ?></div>
                                                     <div class="text">Clave</div>
                                                 </div>
                                             </div>
                                             <div class="groupExtension">
                                                 <div class="miniGroup">
-                                                    <div class="number"><?php echo $Extension["LlamadasRealizadas"] ?></div>
+                                                    <div class="number"><?php echo $Extension["LlamadasRealizadas"]; ?></div>
                                                     <div class="text">Llamadas</div>
                                                 </div>
                                                 <div class="miniGroup">
-                                                    <div class="number"><?php echo $Extension["MinutosUtilizados"] ?></div>
+                                                    <div class="number"><?php echo $Extension["MinutosUtilizados"]; ?></div>
                                                     <div class="text">Minutos</div>
                                                 </div>
                                             </div>

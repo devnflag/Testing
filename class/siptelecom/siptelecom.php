@@ -148,7 +148,7 @@
                             /* $this->updateSaldo($idUsuario,$Precio);
                             $this->updateSegundos($idUsuario,($Plan["cantidadMinutos"] * 60)); */
                             $ClientesClass->updateSaldo($idUsuario,$Precio);
-                            $ClientesClass->updateSegundos($idUsuario,($Plan["cantidadMinutos"] * 60));
+                            $this->updateSegundos($idUsuario,($Plan["cantidadMinutos"] * 60));
                             $ToReturn["result"] = true;
                             $ToReturn["Plan"] = $Plan["nombre"];
                             $ToReturn["Minutos"] = $Plan["cantidadMinutos"];
