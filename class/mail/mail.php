@@ -15,14 +15,24 @@
 					'allow_self_signed' => true
 				)
 			);
-			//$mail->SMTPSecure = "ssl";
+			/* //$mail->SMTPSecure = "ssl";
 			$mail->SMTPSecure = "TLS";
 			$mail->Host = "smtp.gmail.com"; 
 			//$mail->SMTPDebug = 1;  
 			$mail->Port = 587; 
 			$mail->Username = "jonathanurbina92@gmail.com";  
 			$mail->Password = "090192jjur";
-			$mail->From = "jonathanurbina92@gmail.com";   
+			$mail->From = "jonathanurbina92@gmail.com"; */
+
+			//$mail->SMTPSecure = "ssl";
+			$mail->SMTPSecure = "TLS";
+			$mail->Host = "mail.nflag.io"; 
+			//$mail->SMTPDebug = 1;  
+			$mail->Port = 587; 
+			$mail->Username = "info@nflag.io";  
+			$mail->Password = "infonflag.,2112";
+			$mail->From = "info@nflag.io";
+
 			$mail->FromName = "NFLAG";
 			$mail->Subject = "Bienvenid@ a NFLAG";
 			$mail->IsHTML(true);
@@ -47,14 +57,24 @@
 					'allow_self_signed' => true
 				)
 			);
-			//$mail->SMTPSecure = "ssl";
+			/* //$mail->SMTPSecure = "ssl";
 			$mail->SMTPSecure = "TLS";
 			$mail->Host = "smtp.gmail.com"; 
 			//$mail->SMTPDebug = 1;  
 			$mail->Port = 587; 
 			$mail->Username = "jonathanurbina92@gmail.com";  
 			$mail->Password = "090192jjur";
-			$mail->From = "jonathanurbina92@gmail.com";   
+			$mail->From = "jonathanurbina92@gmail.com"; */
+			
+			//$mail->SMTPSecure = "ssl";
+			$mail->SMTPSecure = "TLS";
+			$mail->Host = "mail.nflag.io"; 
+			//$mail->SMTPDebug = 1;  
+			$mail->Port = 587; 
+			$mail->Username = "info@nflag.io";  
+			$mail->Password = "infonflag.,2112";
+			$mail->From = "info@nflag.io";
+			
 			$mail->FromName = "NFLAG";
 			$mail->Subject = "Bienvenid@ a NFLAG";
 			$mail->IsHTML(true);
