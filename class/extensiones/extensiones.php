@@ -26,8 +26,20 @@
             }
             return $ToReturn;
         }
+        function getExtensionByExtensionAndCliente($Extension,$idCliente){
+            $db = new DB();
+            $ToReturn = array();
+            $ToReturn["result"] = false;
+            $SqlExtension = "select E.* from Extensiones E  INNER JOIN clientes_usuarios CU on CU.idUsuario = E.idUsuario INNER JOIN clientes C on C.id = CU.idCliente INNER JOIN usuarios U on U.id = CU.idUsuario where E.Extension='".$Extension."' and C.id='".$idCliente."'";
+            $Extension = $db->select($SqlExtension);
+            if(count($Extension) > 0){
+                $ToReturn["result"] = true;
+                $ToReturn["Data"] = $Extension[0];
+            }
+            return $ToReturn;
+        }
         function addExtensionFile($Extension,$Password,$Contexto){
-            $nombre_archivo = "../../pbxConf/Sip/".$Extension.".conf"; 
+            $nombre_archivo = "../../pbxConf/Sip/".$Extension.".conf";
 
             if(file_exists($nombre_archivo)){
                 //echo $mensaje = "El Archivo $nombre_archivo se ha modificado";
@@ -60,6 +72,10 @@
                 }
                 fclose($archivo);
             }
+        }
+        function unlinkExtensionFile($Extension){
+            $nombre_archivo = "../../pbxConf/Sip/".$Extension.".conf";
+            unlink($nombre_archivo);
         }
     }
 ?>

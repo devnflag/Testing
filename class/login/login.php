@@ -137,5 +137,44 @@
             }
             return $ToReturn;
         }
+        function getUserStatus($Extension,$idCliente){
+            $db = new DB();
+            $ToReturn = array();
+            $ToReturn["result"] = false;
+            $SqlStatus = "select U.status as Estatus from Extensiones E  INNER JOIN clientes_usuarios CU on CU.idUsuario = E.idUsuario INNER JOIN clientes C on C.id = CU.idCliente INNER JOIN usuarios U on U.id = CU.idUsuario where E.Extension='".$Extension."' and C.id='".$idCliente."'";
+            $Status = $db->select($SqlStatus);
+            if(count($Status) > 0){
+                $ToReturn["result"] = true;
+                $ToReturn["Estatus"] = $Status[0]["Estatus"];
+            }
+            return $ToReturn;
+        }
+        function changeUserStatus($Extension,$idCliente,$Status){
+            $db = new DB();
+            $ToReturn = array();
+            $ToReturn["result"] = false;
+            $SqlUpdate = "update usuarios set status='".$Status."' where id in (select E.idUsuario from Extensiones E  INNER JOIN clientes_usuarios CU on CU.idUsuario = E.idUsuario INNER JOIN clientes C on C.id = CU.idCliente where E.Extension='".$Extension."' and C.id='".$idCliente."')";
+            $Update = $db->query($SqlUpdate);
+            if($Update){
+                $ToReturn["result"] = true;
+                $ExtensionesClass = new Extensiones();
+                $AGIClass = new AGI_AsteriskManager();
+                switch($Status){
+                    case "1":
+                        $ExtensionData = $ExtensionesClass->getExtensionByExtensionAndCliente($Extension,$idCliente);
+                        if($ExtensionData["result"]){
+                            $ExtensionData = $ExtensionData["Data"];
+                            $ExtensionesClass->addExtensionFile($Extension,$ExtensionData["Clave"],"NFLAG-Netelip");
+                        }
+                    break;
+                    case "0":
+                        $ExtensionesClass->unlinkExtensionFile($Extension);
+                    break;
+                }
+                $AGIClass->connect("localhost","nflag","nflag.,2112");
+                $ChannelsReponse = $AGIClass->command("reload");
+            }
+            return $ToReturn;
+        }
     }
 ?>

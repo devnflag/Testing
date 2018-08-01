@@ -15,8 +15,19 @@
                                 $Month = date("m");
                                 $Extensiones = $CentralTelecomClass->getExtensions($_SESSION["idCliente"], $Month, $Year);
                                 foreach($Extensiones as $Extension){
+                                    $TextoHabilitacion = "";
+                                    $DisabledClass = "";
+                                    switch($Extension["Estatus"]){
+                                        case "1":
+                                            $TextoHabilitacion = "Inhabilitar";
+                                        break;
+                                        case "0":
+                                            $TextoHabilitacion = "Habilitar";
+                                            $DisabledClass = "Disabled";
+                                        break;
+                                    }
                                     ?>
-                                        <div class="Extension" id="<?php echo $Extension["Extension"]; ?>">
+                                        <div class="Extension <?php echo $DisabledClass; ?>" id="<?php echo $Extension["Extension"]; ?>">
                                             <div class="nombreExtension"><?php echo $Extension["nombreExtension"]; ?></div>
                                             <div class="groupExtension">
                                                 <div class="miniGroup">
@@ -44,7 +55,7 @@
 
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         <a class="dropdown-item Update" >Modificar</a>
-                                                        <a class="dropdown-item Delete" >Eliminar</a>
+                                                        <a class="dropdown-item Habilitacion" ><?php echo $TextoHabilitacion; ?></a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -71,6 +82,26 @@
             </div>
             <div class="modal-footer">
                 <button type="button" name="new" class="btn btn-success">Agregar</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="updateExtension" data-keyboard="false" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title pull-left">Actualiza Extensión</h5>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <h6>Nombre de Extensión</h6>
+                    <input type="text" name="nombreExtension_update" class="form-control form-control-lg">
+                    <i class="form-group__bar"></i>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" name="update" class="btn btn-success">Actualizar</button>
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
             </div>
         </div>

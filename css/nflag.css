@@ -58,6 +58,9 @@ button{
         margin: 10px 20px;
         position: relative;
     }
+    .groupsExtensions .Extension.Disabled{
+        background-color: rgba(215,215,215,0.5) !important;
+    }
         .groupsExtensions .Extension .nombreExtension{
             text-align: center;
             font-size: 17px;
