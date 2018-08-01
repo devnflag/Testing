@@ -121,7 +121,7 @@ $(document).ready(function(){
             success: function(data){
                 $(".page-loader").removeClass("ActiveLoader");
                 console.log(data);
-                /* if(isJson(data)){
+                if(isJson(data)){
                     var Json = JSON.parse(data);
                     if(Json.result){
                         swal({
@@ -137,7 +137,7 @@ $(document).ready(function(){
                             location.reload();
                         });
                     }
-                } */
+                }
             },
             error: function(){
             }
