@@ -126,7 +126,7 @@ $(document).ready(function(){
                     if(Json.result){
                         swal({
                             title: 'Extensión actualizada!',
-                            text: 'La Extension: '+nombreExtension+' Fue actualizada satisfactoriamente',
+                            text: 'La Extension: '+Extension+' Fue actualizada satisfactoriamente',
                             type: 'success',
                             buttonsStyling: false,
                             showConfirmButton: true,
