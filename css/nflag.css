@@ -125,4 +125,7 @@ button{
     .saldoContainer {
         width: 100px;
     }
+    .groupsExtensions .Extension{
+        width: calc(calc(100% / 1) - 40px);
+    }
 }
