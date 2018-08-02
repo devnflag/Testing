@@ -86,6 +86,7 @@ db.connect(function(err) {
                                             }
                                         });
                                     }else{
+                                        console.log("SELECT precioMinuto as Precio from proveedores where id = '"+idProveedor+"'");
                                         //db.query("SELECT precioUnitarioMinuto as Precio FROM config_sipTelecom", function (err, recordset) {
                                         db.query("SELECT precioMinuto as Precio from proveedores where id = '"+idProveedor+"'", function (err, recordset) {
                                             recordset = JSON.parse(JSON.stringify(recordset));
