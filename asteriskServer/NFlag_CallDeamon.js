@@ -60,7 +60,6 @@ db.connect(function(err) {
                     var idServicio = recordset[0]["idServicio"];
                     switch(idServicio){
                         case 1:
-                            console.log("SELECT DCT.segundos as Segundos, C.saldo as Saldo, C.id as idCliente, DCT.idProveedor as idProveedor FROM Extensiones E INNER JOIN central_usuarios_centralTelecom CUCT ON CUCT.idUsuario = E.idUsuario INNER JOIN data_centralTelecom DCT on DCT.id = CUCT.idCentral INNER JOIN clientes C on C.id = DCT.idCliente WHERE E.Extension='"+Extension+"'");
                             db.query("SELECT DCT.segundos as Segundos, C.saldo as Saldo, C.id as idCliente, DCT.idProveedor as idProveedor FROM Extensiones E INNER JOIN central_usuarios_centralTelecom CUCT ON CUCT.idUsuario = E.idUsuario INNER JOIN data_centralTelecom DCT on DCT.id = CUCT.idCentral INNER JOIN clientes C on C.id = DCT.idCliente WHERE E.Extension='"+Extension+"'", function (err, recordset) {
                                 recordset = JSON.parse(JSON.stringify(recordset));
                                 if (err){
@@ -87,7 +86,6 @@ db.connect(function(err) {
                                             }
                                         });
                                     }else{
-                                        console.log("SELECT precioMinuto as Precio from proveedores where id = '"+idProveedor+"'");
                                         //db.query("SELECT precioUnitarioMinuto as Precio FROM config_sipTelecom", function (err, recordset) {
                                         db.query("SELECT precioMinuto as Precio from proveedores where id = '"+idProveedor+"'", function (err, recordset) {
                                             recordset = JSON.parse(JSON.stringify(recordset));
