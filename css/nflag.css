@@ -85,3 +85,44 @@ button{
             top: 5px !important;
             right: 5px !important;
         }
+.saldoContainer {
+    padding: 15px 0px;
+    text-align: center;
+}
+    .saldoContainer .Text {
+        font-size: 13px;
+    }
+    .saldoContainer .Ammount {
+        font-size: 16px;
+    }
+.recargaContainer {
+    padding: 22px 0px;
+}
+    .recargaContainer i {
+        font-size: 24px;
+        color: #FFFFFF !important;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+
+    RESPONSIVE
+
+*/
+
+@media screen and (max-width:780px) {
+    .saldoContainer {
+        width: 100px;
+    }
+}

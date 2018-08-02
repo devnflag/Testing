@@ -15,6 +15,8 @@
     $LoginClass = new Login();
     $GlobalsClass = new Globals();
     $userData = $LoginClass->getUserData();
+    $ClientesClass = new Clientes();
+    $SaldoHeader = $ClientesClass->getSaldo($_SESSION["userID"]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +60,21 @@
 
                 <form class="search"></form>
 
-                <ul class="top-nav"></ul>
+                <ul class="top-nav">
+                    <li>
+                        <div class="row" style="width: 155px;">
+                            <div class="col-md-8 saldoContainer">
+                                <div class="Text">Saldo</div>
+                                <div class="Ammount">$ <?php echo $SaldoHeader; ?></div>
+                            </div>
+                            <a href="cuenta/recarga.php">
+                                <div class="col-md-4 recargaContainer" title="" data-toggle="tooltip" data-original-title="Recarga.">
+                                    <i class="zmdi zmdi-card zmdi-hc-fw"></i>
+                                </div>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
 
                 <div class="clock hidden-md-down">
                     <div class="time">
@@ -83,6 +99,7 @@
 
                         <div class="dropdown-menu">
                             <!-- <a class="dropdown-item" href="cuenta/perfil.php">Perfil</a> -->
+                            <a class="dropdown-item" href="cuenta/recarga.php">Recargar</a>
                             <a class="dropdown-item" href="logout.php">Salir</a>
                         </div>
                     </div>
