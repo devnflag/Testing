@@ -16,7 +16,7 @@
     $GlobalsClass = new Globals();
     $userData = $LoginClass->getUserData();
     $ClientesClass = new Clientes();
-    $SaldoHeader = $ClientesClass->getSaldo($_SESSION["userID"]);
+    $SaldoHeader = number_format($ClientesClass->getSaldo($_SESSION["userID"]),2,',','.');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,14 +99,13 @@
 
                         <div class="dropdown-menu">
                             <!-- <a class="dropdown-item" href="cuenta/perfil.php">Perfil</a> -->
-                            <a class="dropdown-item" href="cuenta/recarga.php">Recargar</a>
                             <a class="dropdown-item" href="logout.php">Salir</a>
                         </div>
                     </div>
 
                     <ul class="navigation">
                         <li class="navigation__active"><a href="index.php"><i class="zmdi zmdi-home"></i> Home</a></li>
-
+                        <li class=""><a href="cuenta/recarga.php"><i class="zmdi zmdi-money zmdi-hc-fw"></i> Recargar Saldo</a></li>
                         <?php
                             echo $MenuClass->getMenu(true);
                         ?>
