@@ -55,12 +55,13 @@ db.connect(function(err) {
 
             db.query("SELECT U.idServicio as idServicio FROM Extensiones E INNER JOIN clientes_usuarios CU on CU.idUsuario = E.idUsuario INNER JOIN usuarios U on U.id = CU.idUsuario WHERE E.Extension='"+Extension+"'", function (err, recordset) {
                 recordset = JSON.parse(JSON.stringify(recordset));
+                console.log(recordset);
                 if (err){
                 }else{
                     var idServicio = recordset[0]["idServicio"];
                     switch(idServicio){
                         case "1":
-                        console.log("SELECT DCT.segundos as Segundos, C.saldo as Saldo, C.id as idCliente, DCT.idProveedor as idProveedor FROM Extensiones E INNER JOIN central_usuarios_centralTelecom CUCT ON CUCT.idUsuario = E.idUsuario INNER JOIN data_centralTelecom DCT on DCT.id = CUCT.idCentral INNER JOIN clientes C on C.id = DCT.idCliente WHERE E.Extension='"+Extension+"'");
+                            console.log("SELECT DCT.segundos as Segundos, C.saldo as Saldo, C.id as idCliente, DCT.idProveedor as idProveedor FROM Extensiones E INNER JOIN central_usuarios_centralTelecom CUCT ON CUCT.idUsuario = E.idUsuario INNER JOIN data_centralTelecom DCT on DCT.id = CUCT.idCentral INNER JOIN clientes C on C.id = DCT.idCliente WHERE E.Extension='"+Extension+"'");
                             db.query("SELECT DCT.segundos as Segundos, C.saldo as Saldo, C.id as idCliente, DCT.idProveedor as idProveedor FROM Extensiones E INNER JOIN central_usuarios_centralTelecom CUCT ON CUCT.idUsuario = E.idUsuario INNER JOIN data_centralTelecom DCT on DCT.id = CUCT.idCentral INNER JOIN clientes C on C.id = DCT.idCliente WHERE E.Extension='"+Extension+"'", function (err, recordset) {
                                 recordset = JSON.parse(JSON.stringify(recordset));
                                 if (err){
