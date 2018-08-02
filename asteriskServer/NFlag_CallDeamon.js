@@ -53,6 +53,7 @@ db.connect(function(err) {
             var Duration = evt.BillableSeconds;
             var Extension = evt.Source;
 
+            console.log("SELECT U.idServicio as idServicio FROM Extensiones E INNER JOIN clientes_usuarios CU on CU.idUsuario = E.idUsuario INNER JOIN usuarios U on U.id = CU.idUsuario WHERE E.Extension='"+Extension+"'");
             db.query("SELECT U.idServicio as idServicio FROM Extensiones E INNER JOIN clientes_usuarios CU on CU.idUsuario = E.idUsuario INNER JOIN usuarios U on U.id = CU.idUsuario WHERE E.Extension='"+Extension+"'", function (err, recordset) {
                 recordset = JSON.parse(JSON.stringify(recordset));
                 if (err){
