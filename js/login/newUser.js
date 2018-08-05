@@ -23,8 +23,31 @@ $(document).ready(function(){
         var Mail = $("input[name='mail']").val();
         var ReMail = $("input[name='remail']").val();
         var Address = $("textarea[name='address']").val();
+        var CanAdd = false;
         if(Mail == ReMail){
-            addClient();
+            if(FullName != ""){
+                if(DNI != ""){
+                    if(Mail != ""){
+                        if(Address != ""){
+                            CanAdd = true;
+                        }
+                    }
+                }
+            }
+            if(CanAdd){
+                addClient();
+            }else{
+                swal({
+                    title: '¡Error!',
+                    text: 'Debe llenar todos los datos.',
+                    type: 'warning',
+                    buttonsStyling: false,
+                    showConfirmButton: false,
+                    buttonsStyling: false,
+                    confirmButtonClass: 'btn btn-sm btn-light',
+                    background: 'rgba(0, 0, 0, 0.96)'
+                });
+            }
         }
     });
     $("button[name='cancel']").click(function(){
