@@ -31,7 +31,7 @@
                             </table>
                         </div>
                         <div class="row">
-                            <div class="tab-container" style="width: 100%;">
+                        <div class="tab-container" style="width: 100%;">
                                 <ul class="nav nav-tabs nav-fill" role="tablist">
                                     <li class="nav-item">
                                         <a class="nav-link active" data-toggle="tab" href="#zoiper" role="tab" aria-expanded="false">Zoiper</a>
@@ -40,6 +40,11 @@
                                 <div class="tab-content">
                                     <div class="row">
                                         <div class="tab-pane fade active show" style="width: 100%" id="zoiper" role="tabpanel" aria-expanded="true">
+                                            <h3 class="card-title" style="text-align: center; font-size: 20px;">Configuración Automática</h3>
+                                            <div class="zoiperQR">
+                                                <img src="https://oem.zoiper.com/qr.php?provider_id=7aeecb04b689b7d18aa3a5ab531ecd89&u=<?php echo $Extension["Extension"]; ?>&h=&p=<?php echo $Extension["Clave"]; ?>&o=&t=&x=&a=&tr=" alt="QR code"/>
+                                            </div>
+                                            <h3 class="card-title" style="text-align: center; font-size: 20px;">Configuración Manual</h3>
                                             <div id="carouselExampleCaption" class="carousel slide" data-ride="carousel">
                                                 <ol class="carousel-indicators">
                                                     <li data-target="#carouselExampleCaption" data-slide-to="0" class="active"></li>

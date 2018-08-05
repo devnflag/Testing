@@ -102,6 +102,11 @@ button{
         font-size: 24px;
         color: #FFFFFF !important;
     }
+.zoiperQR{
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+}
 
 
 
