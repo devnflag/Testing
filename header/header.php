@@ -2,6 +2,10 @@
     if(!isset($_SESSION)){
         session_start();
     }
+    if(!isset($_SESSION["userID"])){
+        session_destroy();
+        header("Location: ../index.php");
+    }
     include_once("../class/db/db.php");
     include_once("../class/menu/menu.php");
     include_once("../class/login/login.php");
