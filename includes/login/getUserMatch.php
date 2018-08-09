@@ -8,7 +8,12 @@
     $User = $_POST["User"];
     $Password = $_POST["Password"];
     
-    $ToReturn = $LoginClass->getUserMatch($User,$Password);
+    if($User != ""){
+        $ToReturn = $LoginClass->getUserMatch($User,$Password);
+    }else{
+        $ToReturn = array();
+        $ToReturn["result"] = false;
+    }
 
     echo json_encode($ToReturn);
 ?>
