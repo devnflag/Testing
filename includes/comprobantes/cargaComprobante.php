@@ -19,7 +19,7 @@
     }
 
 
-    $Comprobante = $ComprobantesClass->nuevoComprobante($idServicio,$_SESSION["userID"],$Ruta,$tipoComprobante);
+    $Comprobante = $ComprobantesClass->nuevoComprobante($_SESSION["idCliente"],$Ruta,$tipoComprobante);
     if($Comprobante["result"]){
         $idComprobante = $Comprobante["idComprobante"];
 

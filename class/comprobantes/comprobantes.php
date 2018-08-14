@@ -1,11 +1,11 @@
 <?php
     class Comprobantes{
 
-        function nuevoComprobante($idServicio,$idUsuario,$rutaComprobante,$tipoComprobante){
+        function nuevoComprobante($idCliente,$rutaComprobante,$tipoComprobante){
             $db = new DB();
             $ToReturn = array();
             $ToReturn["result"] = false;
-            $SqlInsert = "insert into comprobantes (idServicio,idUsuario,tipoComprobante,fechaRegistro) values('".$idServicio."','".$idUsuario."','".$tipoComprobante."',NOW())";
+            $SqlInsert = "insert into comprobantes (idCliente,tipoComprobante,fechaRegistro) values('".$idCliente."','".$tipoComprobante."',NOW())";
             $Insert = $db->query($SqlInsert);
             if($Insert){
                 $ToReturn["result"] = true;
