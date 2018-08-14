@@ -15,6 +15,9 @@
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#webpay" role="tab" aria-expanded="false">Webpay</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#paypal" role="tab" aria-expanded="false">Paypal</a>
+                                </li>
                             </ul>
 
                             <div class="tab-content">
@@ -73,7 +76,11 @@
                                 <div class="tab-pane fade" id="webpay" role="tabpanel">
                                     <p>Muy pronto</p>
                                 </div>
-                            </div>
+                                <div class="tab-pane fade" id="paypal" role="tabpanel">
+                                    <p>Muy pronto</p>
+                                    
+                                </div>
+                            </div>                            
                         </div>
                     </div>
                 </div>
