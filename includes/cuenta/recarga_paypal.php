@@ -1,34 +1,29 @@
 <?php
-    // The custom hidden field (user id) sent along with the button is retrieved here. 
-    print_r($_GET);
-    if($_GET['cm']) $user=$_GET['cm']; 
-    // The unique transaction id. 
-    if($_GET['tx']) $tx= $_GET['tx'];
-    $identity = 'Your Identity'; 
-    // Init curl
-    $ch = curl_init(); 
-    // Set request options 
-    //curl_setopt_array($ch, array ( CURLOPT_URL => 'https://www.sandbox.paypal.com/cgi-bin/webscr',
-    curl_setopt_array($ch, array ( CURLOPT_URL => 'https://www.paypal.com/cgi-bin/webscr',
-    CURLOPT_POST => TRUE,
-    CURLOPT_POSTFIELDS => http_build_query(array
-        (
-        'cmd' => '_notify-synch',
-        'tx' => $tx,
-        'at' => $identity,
-        )),
-    CURLOPT_RETURNTRANSFER => TRUE,
-    CURLOPT_HEADER => FALSE,
-    // CURLOPT_SSL_VERIFYPEER => TRUE,
-    // CURLOPT_CAINFO => 'cacert.pem',
-    ));
-    // Execute request and get response and status code
-    echo $response = curl_exec($ch);
-    $status   = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-    // Close connection
-    curl_close($ch);
-    if($status == 200 AND strpos($response, 'SUCCESS') === 0)
-    {
-        // Save the Record into the database
-    }
+    session_start();
+    include_once("../../class/db/db.php");
+    include_once("../../class/PayPal/DPayPal.php");
+
+    $token=$_GET["token"];//Returned by paypal, you can save this in SESSION too
+	$paypal = new Paypal();
+	$requestParams = array('TOKEN' => $token);
+	
+	$response = $paypal->GetExpressCheckoutDetails($requestParams);
+	$payerId=$response["PAYERID"];//Payer id returned by paypal
+	print_r($response);
+	//Create request for DoExpressCheckoutPayment
+	$requestParams=array(
+		"TOKEN"=>$token,
+		"PAYERID"=>$payerId,
+		"PAYMENTREQUEST_0_AMT"=>"0.01",//Payment amount. This value should be sum of of item values, if there are more items in order
+		"PAYMENTREQUEST_0_CURRENCYCODE"=>"USD",//Payment currency
+		"PAYMENTREQUEST_0_ITEMAMT"=>"0.01"//Item amount
+	);
+	$transactionResponse=$paypal->DoExpressCheckoutPayment($requestParams);//Execute transaction
+	
+	if(is_array($transactionResponse) && $transactionResponse["ACK"]=="Success"){//Payment was successfull
+		//Successful Payment
+	}
+	else{
+		//Failure
+	}
 ?>
