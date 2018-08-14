@@ -35,7 +35,7 @@
             $SqlInsertRecarga = "insert into recargas (idComprobante,fechaRecarga,montoRecarga) values ('".$idComprobante."',NOW(),'".$_GET["saldo"]."')";
             $InsertRecarga = $db->query($SqlInsertRecarga);
         }
-        header('Location: http://app.nflag.io')
+        header('Location: http://app.nflag.io');
 	}
 	else{
 		//Failure
