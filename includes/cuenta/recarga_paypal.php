@@ -1,7 +1,7 @@
 <?php
 // Check to see there are posted variables coming into the script
-if ($_SERVER['REQUEST_METHOD'] != "POST")
-    die("No Post Variables");
+/* if ($_SERVER['REQUEST_METHOD'] != "POST")
+    die("No Post Variables"); */
 // Initialize the $req variable and add CMD key value pair
 $req = 'cmd=_notify-validate';
 // Read the post from PayPal
