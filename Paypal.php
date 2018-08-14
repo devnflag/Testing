@@ -8,8 +8,8 @@
     //https://developer.paypal.com/docs/classic/api/merchant/SetExpressCheckout_API_Operation_NVP/
 
     $requestParams = array(
-        'RETURNURL' => "http://app.nflag.io/includes/cuenta/recarga_paypal.php", //Enter your webiste URL here
-        'CANCELURL' => "http://app.nflag.io/includes/cuenta/recarga_paypal.php"//Enter your website URL here
+        'RETURNURL' => "http://app.nflag.io/includes/cuenta/recarga_paypal.php?idCliente=".$_SESSION["idCliente"]."&saldo=2500", //Enter your webiste URL here
+        'CANCELURL' => "http://app.nflag.io/includes/cuenta/recarga_paypal.php?idCliente=".$_SESSION["idCliente"]."&saldo=2500"//Enter your website URL here
     );
 
     $orderParams = array(
@@ -19,9 +19,7 @@
         "ALLOWNOTE" => "0", //I do not want to allow notes
         "BRANDNAME" => "Here enter your brand name",
         "GIFTRECEIPTENABLE" => "0",
-        "GIFTMESSAGEENABLE" => "0",
-        "idCliente" => $_SESSION["idCliente"],
-        "saldoRecargado" => "2500"
+        "GIFTMESSAGEENABLE" => "0"
     );
     $item = array(
         'PAYMENTREQUEST_0_AMT' => "0.01",
