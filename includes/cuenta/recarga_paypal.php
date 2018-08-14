@@ -24,7 +24,17 @@
 	
 	if(is_array($transactionResponse) && $transactionResponse["ACK"]=="Success"){//Payment was successfull
         //Successful Payment
-        echo "PAGO REALIZADO CORRECTAMENTE";
+        $db = new DB();
+        $SqlUpdateSaldo = "update cliente set saldo=(saldo+".$_GET["saldo"].") where id='".$_GET["idCliente"]."'" ;
+        $UpdateSaldo = $db->query($SqlUpdateSaldo);
+
+        $SqlInsertComprobante = "insert into comprobantes (idUsuario,tipoComprobante,fechaRegistro) values ('".$_GET["idCliente"]."','Paypal',NOW())";
+        $InsertComprobante = $db->query($SqlInsertComprobante);
+        if($InsertComprobante){
+            $idComprobante = $db->getLastID();
+            $SqlInsertRecarga = "insert into recargas (idComprobante,fechaRecarga,montoRecarga) values ('".$idComprobante."',NOW(),'".$_GET["saldo"]."')";
+            $InsertRecarga = $db->query($SqlInsertRecarga);
+        }
 	}
 	else{
 		//Failure
