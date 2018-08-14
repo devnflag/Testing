@@ -25,7 +25,7 @@
 	if(is_array($transactionResponse) && $transactionResponse["ACK"]=="Success"){//Payment was successfull
         //Successful Payment
         $db = new DB();
-        $SqlUpdateSaldo = "update cliente set saldo=(saldo+".$_GET["saldo"].") where id='".$_GET["idCliente"]."'" ;
+        $SqlUpdateSaldo = "update clientes set saldo=(saldo+".$_GET["saldo"].") where id='".$_GET["idCliente"]."'" ;
         $UpdateSaldo = $db->query($SqlUpdateSaldo);
 
         $SqlInsertComprobante = "insert into comprobantes (idUsuario,tipoComprobante,fechaRegistro) values ('".$_GET["idCliente"]."','Paypal',NOW())";
