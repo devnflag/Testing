@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once("class/PayPal/DPayPal.php");
     $paypal = new DPayPal(); //Create an object
 
@@ -18,7 +19,9 @@
         "ALLOWNOTE" => "0", //I do not want to allow notes
         "BRANDNAME" => "Here enter your brand name",
         "GIFTRECEIPTENABLE" => "0",
-        "GIFTMESSAGEENABLE" => "0"
+        "GIFTMESSAGEENABLE" => "0",
+        "idCliente" => $_SESSION["idCliente"],
+        "saldoRecargado" => "2500"
     );
     $item = array(
         'PAYMENTREQUEST_0_AMT' => "0.01",
@@ -44,7 +47,7 @@
         //Now we have to redirect user to the PayPal
         $token = $response['TOKEN'];
 
-        header('Location: https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&saldo=2500&C='.$_SESSION["idCliente"].'&token=' . urlencode($token));
+        header('Location: https://www.paypal.com/cgi-bin/webscr?cmd=_express-checkout&token=' . urlencode($token));
     } else if (is_array($response) && $response['ACK'] == 'Failure') {
         var_dump($response);
         exit;
