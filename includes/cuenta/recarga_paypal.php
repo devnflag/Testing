@@ -9,9 +9,9 @@
 	
 	$response = $paypal->GetExpressCheckoutDetails($requestParams);
 	$payerId=$response["PAYERID"];//Payer id returned by paypal
-    echo "<pre>";
+/*     echo "<pre>";
     print_r($response);
-    echo "</pre>";
+    echo "</pre>"; */
 	//Create request for DoExpressCheckoutPayment
 	$requestParams=array(
 		"TOKEN"=>$token,
