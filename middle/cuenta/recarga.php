@@ -77,8 +77,7 @@
                                     <p>Muy pronto</p>
                                 </div>
                                 <div class="tab-pane fade" id="paypal" role="tabpanel">
-                                    <p>Muy pronto</p>
-                                    
+                                    <p>Muy Pronto</p>
                                 </div>
                             </div>                            
                         </div>
