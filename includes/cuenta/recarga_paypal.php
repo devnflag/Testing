@@ -4,7 +4,7 @@
     include_once("../../class/PayPal/DPayPal.php");
 
     $token=$_GET["token"];//Returned by paypal, you can save this in SESSION too
-	$paypal = new Paypal();
+	$paypal = new DPayPal();
 	$requestParams = array('TOKEN' => $token);
 	
 	$response = $paypal->GetExpressCheckoutDetails($requestParams);
