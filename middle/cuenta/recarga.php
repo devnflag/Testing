@@ -108,7 +108,7 @@
                                                         <td id="comisionPaypal1">0 $</td>
                                                     </tr>
                                                     <tr>
-                                                        <th>Comisión Paypal 2</th>
+                                                        <th>Comisión por Transferencia</th>
                                                         <td id="comisionPaypal2">1 $</td>
                                                     </tr>
                                                     <tr>
