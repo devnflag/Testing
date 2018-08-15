@@ -4,7 +4,7 @@
                 ?>
                 <header class="content__title">
                     <h1>Recarga</h1>
-                    <small>Recargue su saldo para poder disfrutar de nuestro excelente servicio de llamadas internacionales e internacionales</small>
+                    <small>Recargue su saldo para poder disfrutar de nuestro excelente servicio de llamadas internacionales</small>
                 </header>
                 <div class="card">
                     <div class="card-body">
