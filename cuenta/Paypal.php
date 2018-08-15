@@ -12,8 +12,9 @@
     $Tasa = $GlobalsClass->getDolarTasa();
     $ComisionPaypal2 = 1;
     $Dolares = ($Pesos / $Tasa);
-    $ComisionPaypal1 = $Dolares > 0 ? ($Dolares * 0.029) + 0.3 : 0;
-    $Total = $Dolares > 0 ? round($Dolares + $ComisionPaypal1 + $ComisionPaypal2,2) : 0;
+    $Total = $Dolares > 0 ? ($Dolares + $ComisionPaypal2) : 0;
+    $ComisionPaypal1 = $Total > 0 ? ($Total * 0.054) + 0.3 : 0;
+    $Total = round($Total + $ComisionPaypal1,2);
 
     //Generating request parameters for API operation SetExpressCheckout
     //All available parameters for this method are available here

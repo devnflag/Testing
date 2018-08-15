@@ -99,8 +99,10 @@ $(document).ready(function(){
         Tasa = Number(Tasa.replace("$ ",""));
         ComisionPaypal2 = Number(ComisionPaypal2.replace(" $",""));
         var Dolares = (Pesos / Tasa);
-        var ComisionPaypal1 = Dolares > 0 ? (Dolares * 0.029) + 0.3 : 0;
-        var Total = Dolares > 0 ? (Dolares + ComisionPaypal1 + ComisionPaypal2).toFixed(2) : 0;
+        var Total = Dolares > 0 ? (Dolares + ComisionPaypal2) : 0;
+        console.log(Total);
+        var ComisionPaypal1 = Total > 0 ? (Total * 0.054) + 0.3 : 0;
+        Total = (Total + ComisionPaypal1).toFixed(2);
         ComisionPaypal1 = ComisionPaypal1.toFixed(2);
         Dolares = Dolares.toFixed(2);
         $("#comisionPaypal1").html(ComisionPaypal1+" $");
@@ -120,8 +122,10 @@ $(document).ready(function(){
         Tasa = Number(Tasa.replace("$ ",""));
         ComisionPaypal2 = Number(ComisionPaypal2.replace(" $",""));
         var Dolares = (Pesos / Tasa);
-        var ComisionPaypal1 = Dolares > 0 ? (Dolares * 0.029) + 0.3 : 0;
-        var Total = Dolares > 0 ? (Dolares + ComisionPaypal1 + ComisionPaypal2).toFixed(2) : 0;
+        //var ComisionPaypal1 = Dolares > 0 ? (Dolares * 0.054) + 0.3 : 0;
+        var Total = Dolares > 0 ? (Dolares + ComisionPaypal2) : 0;
+        var ComisionPaypal1 = Total > 0 ? (Total * 0.054) + 0.3 : 0;
+        Total = (Total + ComisionPaypal1).toFixed(2);
         ComisionPaypal1 = ComisionPaypal1.toFixed(2);
         Dolares = Dolares.toFixed(2);
         $("#comisionPaypal1").html(ComisionPaypal1+" $");
