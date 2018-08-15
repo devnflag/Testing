@@ -1,3 +1,7 @@
+                <?php
+                    $GlobalClass = new Globals();
+                    $Dolar = $GlobalClass->getDolarTasa();
+                ?>
                 <header class="content__title">
                     <h1>Recarga</h1>
                     <small>Recargue su saldo para poder disfrutar de nuestro excelente servicio de llamadas internacionales e internacionales</small>
@@ -77,7 +81,50 @@
                                     <p>Muy pronto</p>
                                 </div>
                                 <div class="tab-pane fade" id="paypal" role="tabpanel">
-                                    <p>Muy Pronto</p>
+                                    <div class="row">
+                                        <div class="col-sm-4"></div>
+                                        <div class="card col-sm-4">
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <h6>Ingrese la cantidad de Pesos</h6>
+                                                    <input type="text" name="pesosChile" class="form-control form-control-lg">
+                                                    <i class="form-group__bar"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4"></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-sm-4"></div>
+                                        <div class="card col-sm-4">
+                                            <div class="row">
+                                                <table class="table table-bordered invoice__table" style="margin: 0px;">
+                                                    <tr>
+                                                        <th>Tasa</th>
+                                                        <td id="tasaDolar">$ <?php echo $Dolar; ?></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Comisión Paypal 1</th>
+                                                        <td id="comisionPaypal1">0 $</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Comisión Paypal 2</th>
+                                                        <td id="comisionPaypal2">1 $</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Dolares</th>
+                                                        <td id="Dolares">0 $</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Total</th>
+                                                        <td id="totalDolares">0 $</td>
+                                                    </tr>
+                                                </table>
+                                                <button class="btn btn-primary" name="pagarPaypal" style="width: 100%;" >PAGAR</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4"></div>
+                                    </div>
                                 </div>
                             </div>                            
                         </div>

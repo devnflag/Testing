@@ -1,15 +1,27 @@
 <?php
     session_start();
-    include_once("class/PayPal/DPayPal.php");
+    include_once("../class/db/db.php");
+    include_once("../class/PayPal/DPayPal.php");
+    include_once("../class/globals/globals.php");
     $paypal = new DPayPal(); //Create an object
+    $GlobalsClass = new Globals();
+
+
+    $Pesos = $_GET["saldo"];
+
+    $Tasa = $GlobalsClass->getDolarTasa();
+    $ComisionPaypal2 = 1;
+    $Dolares = ($Pesos / $Tasa);
+    $ComisionPaypal1 = $Dolares > 0 ? ($Dolares * 0.029) + 0.3 : 0;
+    $Total = $Dolares > 0 ? round($Dolares + $ComisionPaypal1 + $ComisionPaypal2,2) : 0;
 
     //Generating request parameters for API operation SetExpressCheckout
     //All available parameters for this method are available here
     //https://developer.paypal.com/docs/classic/api/merchant/SetExpressCheckout_API_Operation_NVP/
 
     $requestParams = array(
-        'RETURNURL' => "http://app.nflag.io/includes/cuenta/recarga_paypal.php?idCliente=".$_SESSION["idCliente"]."&saldo=2500", //Enter your webiste URL here
-        'CANCELURL' => "http://app.nflag.io/includes/cuenta/recarga_paypal.php?idCliente=".$_SESSION["idCliente"]."&saldo=2500"//Enter your website URL here
+        'RETURNURL' => "http://app.nflag.io/includes/cuenta/recarga_paypal.php?idCliente=".$_SESSION["idCliente"]."&saldo=".$Pesos, //Enter your webiste URL here
+        'CANCELURL' => "http://app.nflag.io/includes/cuenta/recarga_paypal.php?idCliente=".$_SESSION["idCliente"]."&saldo=".$Pesos//Enter your website URL here
     );
 
     $orderParams = array(
@@ -17,17 +29,17 @@
         "MAXAMT" => "100", //Set max transaction amount
         "NOSHIPPING" => "1", //I do not want shipping
         "ALLOWNOTE" => "0", //I do not want to allow notes
-        "BRANDNAME" => "Here enter your brand name",
+        "BRANDNAME" => "NFLAG",
         "GIFTRECEIPTENABLE" => "0",
         "GIFTMESSAGEENABLE" => "0"
     );
     $item = array(
-        'PAYMENTREQUEST_0_AMT' => "0.01",
+        'PAYMENTREQUEST_0_AMT' => $Total,
         'PAYMENTREQUEST_0_CURRENCYCODE' => 'USD',
-        'PAYMENTREQUEST_0_ITEMAMT' => "0.01",
-        'L_PAYMENTREQUEST_0_NAME0' => 'Item name',
-        'L_PAYMENTREQUEST_0_DESC0' => 'Item description',
-        'L_PAYMENTREQUEST_0_AMT0' => "0.01",
+        'PAYMENTREQUEST_0_ITEMAMT' => $Total,
+        'L_PAYMENTREQUEST_0_NAME0' => 'Recarga de Saldo',
+        'L_PAYMENTREQUEST_0_DESC0' => 'Recarga de Saldo ($ '.$Pesos.')',
+        'L_PAYMENTREQUEST_0_AMT0' => $Total,
         'L_PAYMENTREQUEST_0_QTY0' => '1',
             //"PAYMENTREQUEST_0_INVNUM" => $transaction->id - This field is useful if you want to send your internal transaction ID
     );

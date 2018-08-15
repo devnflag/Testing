@@ -89,4 +89,62 @@ $(document).ready(function(){
             });
         }
     });
+    $("input[name='pesosChile']").keyup(function(){
+        var Pesos = $(this).val();
+        if(Pesos == ""){
+            Pesos = 0;
+        }
+        var Tasa = $("#tasaDolar").html();
+        var ComisionPaypal2 = $("#comisionPaypal2").html();
+        Tasa = Number(Tasa.replace("$ ",""));
+        ComisionPaypal2 = Number(ComisionPaypal2.replace(" $",""));
+        var Dolares = (Pesos / Tasa);
+        var ComisionPaypal1 = Dolares > 0 ? (Dolares * 0.029) + 0.3 : 0;
+        var Total = Dolares > 0 ? (Dolares + ComisionPaypal1 + ComisionPaypal2).toFixed(2) : 0;
+        ComisionPaypal1 = ComisionPaypal1.toFixed(2);
+        Dolares = Dolares.toFixed(2);
+        $("#comisionPaypal1").html(ComisionPaypal1+" $");
+        $("#Dolares").html(Dolares+" $");
+        $("#totalDolares").html(Total+" $");
+    });
+    $("input[name='pesosChile']").on("input", function () { 
+        this.value = this.value.replace(/[^0-9]/g,'');
+    });
+    $("button[name='pagarPaypal']").click(function(){
+        var Pesos = $("input[name='pesosChile']").val();
+        if(Pesos == ""){
+            Pesos = 0;
+        }
+        var Tasa = $("#tasaDolar").html();
+        var ComisionPaypal2 = $("#comisionPaypal2").html();
+        Tasa = Number(Tasa.replace("$ ",""));
+        ComisionPaypal2 = Number(ComisionPaypal2.replace(" $",""));
+        var Dolares = (Pesos / Tasa);
+        var ComisionPaypal1 = Dolares > 0 ? (Dolares * 0.029) + 0.3 : 0;
+        var Total = Dolares > 0 ? (Dolares + ComisionPaypal1 + ComisionPaypal2).toFixed(2) : 0;
+        ComisionPaypal1 = ComisionPaypal1.toFixed(2);
+        Dolares = Dolares.toFixed(2);
+        $("#comisionPaypal1").html(ComisionPaypal1+" $");
+        $("#Dolares").html(Dolares+" $");
+        $("#totalDolares").html(Total+" $");
+        if(Total > 0){
+            PagarPaypal(Pesos);
+        }else{
+            swal({
+                title: '¡Error!',
+                text: 'Debe ingresar una cantidad de pesos a comprar.',
+                type: 'warning',
+                timer: 2000,
+                buttonsStyling: false,
+                showConfirmButton: false,
+                buttonsStyling: false,
+                confirmButtonClass: 'btn btn-sm btn-light',
+                background: 'rgba(0, 0, 0, 0.96)'
+            });
+        }
+    });
+
+    function PagarPaypal(Pesos){
+        window.location = "../cuenta/Paypal.php?saldo="+Pesos;
+    }
 });
