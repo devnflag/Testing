@@ -21,7 +21,7 @@
 
     $requestParams = array(
         'RETURNURL' => "http://app.nflag.io/includes/cuenta/recarga_paypal.php?idCliente=".$_SESSION["idCliente"]."&saldo=".$Pesos, //Enter your webiste URL here
-        'CANCELURL' => "http://app.nflag.io/includes/cuenta/recarga_paypal.php?idCliente=".$_SESSION["idCliente"]."&saldo=".$Pesos//Enter your website URL here
+        'CANCELURL' => "http://http://app.nflag.io/cuenta/recarga.php"//Enter your website URL here
     );
 
     $orderParams = array(
