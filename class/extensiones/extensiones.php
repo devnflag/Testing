@@ -178,5 +178,13 @@
             }
             return $ToReturn;
         }
+        function actualizarEliminarExtensionNumero($Extension,$Numero){
+            $db = new DB();
+            $SqlUpdateNumero = "update numerosInbound set cantidadDisponible = cantidadDisponible - 1 where numero='".$Numero."'";
+            $UpdateNumero = $db->query($SqlUpdateNumero);
+
+            $SqlDelete = "delete from extensiones_numerosInbound where Extension='".$Extension."'";
+            $Delete = $db->query($SqlDelete);
+        }
     }
 ?>

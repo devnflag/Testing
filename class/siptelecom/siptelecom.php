@@ -225,8 +225,9 @@
                 $Extension = $Numero["Extension"];
                 $ExtensionesClass = new Extensiones();
                 $ExtensionesClass->updateClaveAsociado($Extension,"");
-                $ExtensionesClass->unlinkIVRFile($NumeroInbound);
-                $ExtensionesClass->addIVRFile($NumeroInbound);
+                $ExtensionesClass->unlinkIVRFile($NumeroInbound,true);
+                $ExtensionesClass->addIVRFile($NumeroInbound,true);
+                $ExtensionesClass->actualizarEliminarExtensionNumero($Extension,$NumeroInbound);
             }
             $AGIClass = new AGI_AsteriskManager();
             $AGIClass->connect("localhost","nflag","nflag.,2112");
