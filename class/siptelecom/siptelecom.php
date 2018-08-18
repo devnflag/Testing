@@ -167,12 +167,10 @@
         }
         function eliminarBolsasVencimiento($Date){
             $db = new DB();
-            $SqlUpdateSegundos = "update data_sipTelecom set segundos = 0 where idUsuario in (select idUsuario from usuarios_planes_sipTelecom where ADDDATE(fechaCulminacion, INTERVAL 1 DAY) <= '".$Date."')";
+            $SqlUpdateSegundos = "update data_sipTelecom set segundos = 0 where idUsuario in (select idUsuario from usuarios_planes_sipTelecom UPST inner join planes_sipTelecom PST on PST.id = UPST.idPlan where PST.inbound='0' and ADDDATE(UPST.fechaCulminacion, INTERVAL 1 DAY) <= '".$Date."')";
             $UpdateSegundos = $db->query($SqlUpdateSegundos);
-            if($UpdateSegundos){
-                $SqlDeletePlan = "DELETE from usuarios_planes_sipTelecom where ADDDATE(fechaCulminacion, INTERVAL 1 DAY) <= '".$Date."'";
-                $DeletePlan = $db->query($SqlDeletePlan);    
-            }
+            $SqlDeletePlan = "DELETE from usuarios_planes_sipTelecom where ADDDATE(fechaCulminacion, INTERVAL 1 DAY) <= '".$Date."'";
+            $DeletePlan = $db->query($SqlDeletePlan);
         }
         function getPrecioPorMinutoUnitario(){
             $db = new DB();
