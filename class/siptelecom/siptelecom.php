@@ -79,7 +79,7 @@
         }
         function getPlanes(){
             $db = new DB();
-            $SqlPlanes = "select * from planes_sipTelecom";
+            $SqlPlanes = "select * from planes_sipTelecom where inbound='0'";
             $Planes = $db->select($SqlPlanes);
             return $Planes;
         }
