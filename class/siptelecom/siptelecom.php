@@ -219,6 +219,7 @@
             $SqlDeletePlan = "DELETE from usuarios_planes_sipTelecom where ADDDATE(fechaCulminacion, INTERVAL 1 DAY) <= '".$Date."'";
             $DeletePlan = $db->query($SqlDeletePlan);
 
+            print_r($Numeros);
             foreach($Numeros as $Numero){
                 $NumeroInbound = $Numero["Numero"];
                 $Extension = $Numero["Extension"];
