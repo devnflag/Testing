@@ -37,7 +37,12 @@
             $Segundos = $db->select($SqlSegundos);
             return $Segundos[0]["segundos"];
         }
-        function getPlanActivado($idUsuario){
+        function getPlanActivado($idUsuario,$Inbound = "NULL"){
+            if($Inbound == "NULL"){
+                $WhereInbound = "";
+            }else{
+                $WhereInbound = " AND PST.inbound='".$Inbound ."'";
+            }
             $db = new DB();
             $SqlPlan = "SELECT
                             PST.*,
@@ -47,7 +52,9 @@
                             planes_sipTelecom PST
                                 INNER JOIN usuarios_planes_sipTelecom UPST ON UPST.idPlan = PST.id
                         WHERE
-                            UPST.idUsuario='".$idUsuario."'";
+                            UPST.idUsuario='".$idUsuario."'
+                            ".$WhereInbound."
+                            ";
             $Plan = $db->select($SqlPlan);
             return $Plan;
         }
@@ -79,7 +86,7 @@
         }
         function getPlanes(){
             $db = new DB();
-            $SqlPlanes = "select * from planes_sipTelecom where inbound='0'";
+            $SqlPlanes = "select * from planes_sipTelecom";
             $Planes = $db->select($SqlPlanes);
             return $Planes;
         }
@@ -89,13 +96,19 @@
             $Caracteristicas = $db->select($SqlCaracteristicas);
             return $Caracteristicas;
         }
-        function HavePlan($idUsuario){
+        function HavePlan($idUsuario,$idPlan){
             $db = new DB();
-            $ToReturn = false;
-            $SqlValidacion = "select * from usuarios_planes_sipTelecom where idUsuario='".$idUsuario."'";
-            $Validacion = $db->select($SqlValidacion);
-            if(count($Validacion) > 0){
-                $ToReturn = true;
+            $ToReturn = array();
+            $ToReturn["result"] = false;
+            $Plan = $this->getPlan($idPlan);
+            if(count($Plan) > 0){
+                $Plan = $Plan[0];
+                $SqlValidacion = "select * from usuarios_planes_sipTelecom UPST INNER JOIN planes_sipTelecom PST on PST.id = UPST.idPlan where UPST.idUsuario='".$idUsuario."' and PST.inbound='".$Plan["inbound"]."'";
+                $Validacion = $db->select($SqlValidacion);
+                if(count($Validacion) > 0){
+                    $ToReturn["result"] = true;
+                    $ToReturn["inbound"] = $Plan["inbound"];
+                }
             }
             return $ToReturn;
         }
@@ -116,49 +129,79 @@
             $ToReturn["result"] = false;
 
             $ClientesClass = new Clientes();
+            $ExtensionesClass = new Extensiones();
 
             $Plan = $this->getPlan($idPlan);
             if(count($Plan) > 0){
                 $Plan = $Plan[0];
                 $Precio = $Plan["precio"];
-                $SaldoActual = $ClientesClass->getSaldo($idUsuario);
-                if($Precio <= $SaldoActual){
-                
-                    $modoVencimiento = $Plan["modoVencimiento"];
-                    $fechaActual = date("Ymd");
-                    $fechaVencimiento = "";
-                    switch($modoVencimiento){
-                        case "1":
-                            $fechaVencimiento = date("Ymd",strtotime("+7 day",strtotime($fechaActual)));
-                            $TiempoVencimiento = "7 días";
-                        break;
-                        case "2":
-                            $fechaVencimiento = date("Ymd",strtotime("+15 day",strtotime($fechaActual)));
-                            $TiempoVencimiento = "15 días";
-                        break;
-                        case "3":
-                            $fechaVencimiento = date("Ymd",strtotime("+1 month",strtotime($fechaActual)));
-                            $TiempoVencimiento = "1 Mes";
-                        break;
-                    }
-                    if($fechaVencimiento != ""){
-                        $SqlInsert = "insert into usuarios_planes_sipTelecom (idUsuario,idPlan,fechaActivacion,fechaCulminacion) values ('".$idUsuario."','".$idPlan."','".$fechaActual."','".$fechaVencimiento."')";
-                        $Insert = $db->query($SqlInsert);
-                        if($Insert){
-                            /* $this->updateSaldo($idUsuario,$Precio);
-                            $this->updateSegundos($idUsuario,($Plan["cantidadMinutos"] * 60)); */
-                            $ClientesClass->updateSaldo($idUsuario,$Precio);
-                            $this->updateSegundos($idUsuario,($Plan["cantidadMinutos"] * 60));
-                            $ToReturn["result"] = true;
-                            $ToReturn["Plan"] = $Plan["nombre"];
-                            $ToReturn["Minutos"] = $Plan["cantidadMinutos"];
-                            $ToReturn["TiempoVencimiento"] = $TiempoVencimiento;
+                $Inbound = $Plan["inbound"];
+                $Next = false;
+                if($Inbound == "1"){
+                    $Next = $ExtensionesClass->ExistenNumerosInbound();
+                }else{
+                    $Next = true;
+                }
+                if($Next){
+                    $SaldoActual = $ClientesClass->getSaldo($idUsuario);
+                    if($Precio <= $SaldoActual){
+                    
+                        $modoVencimiento = $Plan["modoVencimiento"];
+                        $fechaActual = date("Ymd");
+                        $fechaVencimiento = "";
+                        switch($modoVencimiento){
+                            case "1":
+                                $fechaVencimiento = date("Ymd",strtotime("+7 day",strtotime($fechaActual)));
+                                $TiempoVencimiento = "7 días";
+                            break;
+                            case "2":
+                                $fechaVencimiento = date("Ymd",strtotime("+15 day",strtotime($fechaActual)));
+                                $TiempoVencimiento = "15 días";
+                            break;
+                            case "3":
+                                $fechaVencimiento = date("Ymd",strtotime("+1 month",strtotime($fechaActual)));
+                                $TiempoVencimiento = "1 Mes";
+                            break;
+                        }
+                        if($fechaVencimiento != ""){
+                            $SqlInsert = "insert into usuarios_planes_sipTelecom (idUsuario,idPlan,fechaActivacion,fechaCulminacion) values ('".$idUsuario."','".$idPlan."','".$fechaActual."','".$fechaVencimiento."')";
+                            $Insert = $db->query($SqlInsert);
+                            if($Insert){
+                                $ClientesClass->updateSaldo($idUsuario,$Precio);
+                                if($Plan["inbound"] == "0"){
+                                    $this->updateSegundos($idUsuario,($Plan["cantidadMinutos"] * 60));
+                                    $ToReturn["Minutos"] = $Plan["cantidadMinutos"];
+                                }else{
+                                    $ToReturn["Inbound"] = true;
+                                    $Extension = $ExtensionesClass->getExtensionByUserID($idUsuario);
+                                    if($Extension["result"]){
+                                        $Extension = $Extension["Data"]["Extension"];
+                                        $Numero = $ExtensionesClass->getNumeroDisponible($Extension);
+                                        if($Numero["result"]){
+                                            $ClaveAsociado = $Extension.$ExtensionesClass->generarClaveAsociado(4);
+                                            $ExtensionesClass->updateClaveAsociado($Extension,$ClaveAsociado);
+                                            $ExtensionesClass->unlinkIVRFile($Numero["Numero"]);
+                                            $ExtensionesClass->addIVRFile($Numero["Numero"]);
+                                            $ToReturn["Numero"] = $Numero["Numero"];
+                                            $ToReturn["ClaveAsociado"] = $ClaveAsociado;
+                                            $AGIClass = new AGI_AsteriskManager();
+                                            $AGIClass->connect("localhost","nflag","nflag.,2112");
+                                            $ChannelsReponse = $AGIClass->command("reload");
+                                        }
+                                    }
+                                }
+                                $ToReturn["result"] = true;
+                                $ToReturn["Plan"] = $Plan["nombre"];
+                                $ToReturn["TiempoVencimiento"] = $TiempoVencimiento;
+                            }
+                        }else{
+
                         }
                     }else{
-
+                        $ToReturn["Message"] = 'Su saldo no es suficiente para contratar el plan "'.$Plan["nombre"].'". Su saldo es: $ '.number_format($SaldoActual,0,',','.');
                     }
                 }else{
-                    $ToReturn["Message"] = 'Su saldo no es suficiente para contratar el plan "'.$Plan["nombre"].'". Su saldo es: $ '.number_format($SaldoActual,0,',','.');
+                    $ToReturn["Message"] = 'No hay disponibilidad de números para contratar el plan de llamadas entrantes, comuniquese con Soporte para gestionar su solicitud.';
                 }
             }else{
                 $ToReturn["Message"] = "Hubo un error al contratar el plan: ". $idPlan." Comunique este mensaje a soporte técnico";
@@ -169,8 +212,23 @@
             $db = new DB();
             $SqlUpdateSegundos = "update data_sipTelecom set segundos = 0 where idUsuario in (select idUsuario from usuarios_planes_sipTelecom UPST inner join planes_sipTelecom PST on PST.id = UPST.idPlan where PST.inbound='0' and ADDDATE(UPST.fechaCulminacion, INTERVAL 1 DAY) <= '".$Date."')";
             $UpdateSegundos = $db->query($SqlUpdateSegundos);
+
+            $SqlNumeros = "select NI.numero as Numero, E.Extension as Extension from usuarios_planes_sipTelecom UPST inner join planes_sipTelecom PST on PST.id = UPST.idPlan INNER JOIN Extensiones E on E.idUsuario = UPST.idUsuario INNER JOIN extensiones_numerosInbound ENI on ENI.Extension = E.Extension INNER JOIN numerosInbound NI on NI.id = ENI.idNumero where PST.inbound='1' and ADDDATE(UPST.fechaCulminacion, INTERVAL 1 DAY) <= '".$Date."'";
+            $Numeros = $db->select($SqlNumeros);
+
             $SqlDeletePlan = "DELETE from usuarios_planes_sipTelecom where ADDDATE(fechaCulminacion, INTERVAL 1 DAY) <= '".$Date."'";
             $DeletePlan = $db->query($SqlDeletePlan);
+
+            foreach($Numero as $Numero){
+                $NumeroInbound = $Numero["Numero"];
+                $Extension = $Numero["Extension"];
+                $ExtensionesClass->updateClaveAsociado($Extension,"");
+                $ExtensionesClass->unlinkIVRFile($NumeroInbound);
+                $ExtensionesClass->addIVRFile($NumeroInbound);
+            }
+            $AGIClass = new AGI_AsteriskManager();
+            $AGIClass->connect("localhost","nflag","nflag.,2112");
+            $ChannelsReponse = $AGIClass->command("reload");
         }
         function getPrecioPorMinutoUnitario(){
             $db = new DB();

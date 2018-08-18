@@ -76,12 +76,7 @@ db.connect(function(err) {
                                             //console.log(recordset);
                                             if (!err) {
                                                 if(Segundos <= 0){
-                                                    /* db.query("DELETE FROM usuarios_planes_sipTelecom where idUsuario='"+idUsuario+"'", function (err, recordset) {
-                                                        //console.log(recordset);
-                                                        if (!err) {
-                                                            
-                                                        }
-                                                    }); */
+                                                    
                                                 }
                                             }
                                         });
@@ -125,7 +120,7 @@ db.connect(function(err) {
                                             //console.log(recordset);
                                             if (!err) {
                                                 if(Segundos <= 0){
-                                                    db.query("DELETE FROM usuarios_planes_sipTelecom where idUsuario='"+idUsuario+"'", function (err, recordset) {
+                                                    db.query("DELETE FROM usuarios_planes_sipTelecom where idUsuario='"+idUsuario+"' and idPlan in (select id from planes_sipTelecom where inbound='0')", function (err, recordset) {
                                                         //console.log(recordset);
                                                         if (!err) {
                                                             

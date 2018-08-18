@@ -27,6 +27,21 @@
                                         <td>SERVIDOR</td>
                                         <td><?php echo $NFlagConfig["sipTelecomServer"]; ?></td>
                                     </tr>
+                                    <?php
+                                        $NumeroInbound = $ExtensionesClass->getNumeroFromExtension($Extension["Extension"]);
+                                        if($NumeroInbound != ""){
+                                    ?>
+                                            <tr>
+                                                <td>NÚMERO (LLAMADAS ENTRANTES)</td>
+                                                <td><?php echo $NumeroInbound; ?></td>
+                                            </tr>
+                                            <tr>
+                                                <td>CLAVE DEL ASOCIADO</td>
+                                                <td><?php echo $Extension["claveAsociado"]; ?></td>
+                                            </tr>
+                                    <?php
+                                        }
+                                    ?>
                                 </tbody>
                             </table>
                         </div>

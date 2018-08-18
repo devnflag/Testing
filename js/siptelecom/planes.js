@@ -6,7 +6,7 @@ $(document).ready(function(){
         var idPlan = IDArray[1];
         var Precio = IDArray[0];
         swal({
-            title: '¿Esta seguro de contratar la bolsa seleccionada?',
+            title: '¿Esta seguro de contratar el plan seleccionado?',
             text: 'Se le hara un recargo a su cuenta de ' + Precio,
             type: 'warning',
             showCancelButton: true,
@@ -39,9 +39,15 @@ $(document).ready(function(){
                 if(isJson(data)){
                     var Json = JSON.parse(data);
                     if(Json.result){
+                        var Message = "";
+                        if(Json.Inbound){
+                            Message = 'Ha contratado el plan "' + Json.Plan + '" el cual cuenta con recepción de llamadas 24/7 a través del número: '+Json.Numero+' con Clave de asociado: '+Json.ClaveAsociado+' y vence en ' + Json.TiempoVencimiento;
+                        }else{
+                            Message = 'Ha contratado el plan "' + Json.Plan + '" el cual cuenta con ' + Json.Minutos + ' minutos y vencen en ' + Json.TiempoVencimiento;
+                        }
                         swal({
                             title: '¡Plan Contratado!',
-                            text: 'Ha contratado el plan "' + Json.Plan + '" el cual cuenta con ' + Json.Minutos + ' minutos y vencen en ' + Json.TiempoVencimiento,
+                            text: Message,
                             type: 'success',
                             buttonsStyling: false,
                             showConfirmButton: true,

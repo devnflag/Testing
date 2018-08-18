@@ -6,7 +6,9 @@
                 <div class="row price-table price-table--highlight">
                     <?php
                         $SipTelecomClass = new SipTelecom();
+                        $ExtensionesClass = new Extensiones();
                         $Planes = $SipTelecomClass->getPlanes();
+                        $ExistenNumerosInbound = $ExtensionesClass->ExistenNumerosInbound();
                         $Cont = 1;
                         foreach($Planes as $Plan){
                             if($Cont % 2 == 0){
@@ -34,7 +36,19 @@
                                                 }
                                             ?>
                                         </ul>
-                                        <a id="<?php echo "$ ". number_format($Plan["precio"],0,',','.')."_".$Plan["id"]; ?>" class="select_plan price-table__action">CONTRATAR</a>
+                                        <?php
+                                            if($Plan["inbound"] == "1"){
+                                                if($ExistenNumerosInbound){
+                                                    ?>
+                                                        <a id="<?php echo "$ ". number_format($Plan["precio"],0,',','.')."_".$Plan["id"]; ?>" class="select_plan price-table__action">CONTRATAR</a>
+                                                    <?php
+                                                }
+                                            }else{
+                                                ?>
+                                                    <a id="<?php echo "$ ". number_format($Plan["precio"],0,',','.')."_".$Plan["id"]; ?>" class="select_plan price-table__action">CONTRATAR</a>
+                                                <?php
+                                            }
+                                        ?>
                                     </div>
                                 </div>
                             <?php

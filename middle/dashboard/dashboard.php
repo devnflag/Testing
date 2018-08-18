@@ -16,7 +16,7 @@
                                 $SipTelecomClass = new SipTelecom();
 
                                 $Saldo = number_format($ClientesClass->getSaldo($_SESSION["userID"]), 2, ',', '.');
-                                $Plan = $SipTelecomClass->getPlanActivado($_SESSION["userID"]);
+                                $Plan = $SipTelecomClass->getPlanActivado($_SESSION["userID"],'0');
                                 $PrecioMinutoUnitario = $SipTelecomClass->getPrecioPorMinutoUnitario();
                                 if(count($Plan) > 0){
                                     $Plan = $Plan[0];
@@ -82,32 +82,76 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="row" style="margin-top: 25px;">
-                                                    <div class="col-sm-3"></div>
-                                                    <div class="col-sm-6">
-                                                        <div class="invoice__attrs__item">
-                                                            <small>Plan Activado</small>
-                                                            <h3><?php echo $NombrePlan; ?></h3>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-sm-3"></div>
-                                                    <div class="col-sm-3"></div>
-                                                    <div class="col-sm-6">
-                                                        <div class="col-sm-6" style="padding: 0; float: left;">
-                                                            <div class="invoice__attrs__item">
-                                                                <small>Fecha de Activación</small>
-                                                                <h3><?php echo $fechaActivacion; ?></h3>
+                                                <?php
+                                                    $Planes = $SipTelecomClass->getPlanActivado($_SESSION["userID"]);
+                                                    if(count($Planes) > 0){
+                                                        foreach($Planes as $Plan){
+                                                            $NombrePlan = $Plan["nombre"];
+                                                            $fechaActivacion = $Plan["fechaActivacion"];
+                                                            $fechaCulminacion = $Plan["fechaCulminacion"];
+                                                ?>
+                                                            <div class="row" style="margin-top: 25px;">
+                                                                <div class="col-sm-3"></div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="invoice__attrs__item">
+                                                                        <small>Plan Activado</small>
+                                                                        <h3><?php echo $NombrePlan; ?></h3>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3"></div>
+                                                                <div class="col-sm-3"></div>
+                                                                <div class="col-sm-6">
+                                                                    <div class="col-sm-6" style="padding: 0; float: left;">
+                                                                        <div class="invoice__attrs__item">
+                                                                            <small>Fecha de Activación</small>
+                                                                            <h3><?php echo $fechaActivacion; ?></h3>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="col-sm-6" style="padding: 0; float: left;">
+                                                                        <div class="invoice__attrs__item">
+                                                                            <small>Fecha de Culminacion</small>
+                                                                            <h3><?php echo $fechaCulminacion; ?></h3>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-3"></div>
                                                             </div>
-                                                        </div>
-                                                        <div class="col-sm-6" style="padding: 0; float: left;">
-                                                            <div class="invoice__attrs__item">
-                                                                <small>Fecha de Culminacion</small>
-                                                                <h3><?php echo $fechaCulminacion; ?></h3>
+                                                <?php
+                                                        }
+                                                    }else{
+                                                        $NombrePlan = " Sin plan asociado";
+                                                        $fechaActivacion = "-";
+                                                        $fechaCulminacion = "-";
+                                                ?>
+                                                        <div class="row" style="margin-top: 25px;">
+                                                            <div class="col-sm-3"></div>
+                                                            <div class="col-sm-6">
+                                                                <div class="invoice__attrs__item">
+                                                                    <small>Plan Activado</small>
+                                                                    <h3><?php echo $NombrePlan; ?></h3>
+                                                                </div>
                                                             </div>
+                                                            <div class="col-sm-3"></div>
+                                                            <div class="col-sm-3"></div>
+                                                            <div class="col-sm-6">
+                                                                <div class="col-sm-6" style="padding: 0; float: left;">
+                                                                    <div class="invoice__attrs__item">
+                                                                        <small>Fecha de Activación</small>
+                                                                        <h3><?php echo $fechaActivacion; ?></h3>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-sm-6" style="padding: 0; float: left;">
+                                                                    <div class="invoice__attrs__item">
+                                                                        <small>Fecha de Culminacion</small>
+                                                                        <h3><?php echo $fechaCulminacion; ?></h3>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-sm-3"></div>
                                                         </div>
-                                                    </div>
-                                                    <div class="col-sm-3"></div>
-                                                </div>
+                                                <?php
+                                                    }
+                                                ?>
                                             </div>
                                         </div>
                                     </div>
