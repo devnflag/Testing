@@ -223,7 +223,7 @@
             foreach($Numeros as $Numero){
                 $NumeroInbound = $Numero["Numero"];
                 $Extension = $Numero["Extension"];
-                $ExtensionesClass = new Extensions();
+                $ExtensionesClass = new Extensiones();
                 $ExtensionesClass->updateClaveAsociado($Extension,"");
                 $ExtensionesClass->unlinkIVRFile($NumeroInbound);
                 $ExtensionesClass->addIVRFile($NumeroInbound);
