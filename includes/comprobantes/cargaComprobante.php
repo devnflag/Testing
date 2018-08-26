@@ -12,7 +12,7 @@
     $ComprobantesClass = new Comprobantes();
 
     $File = $_FILES['file']['name'];
-    $Ruta = "../../facturas/".$idServicio."/U".$_SESSION["userID"]."/";
+    $Ruta = "../../facturas/C".$_SESSION["idCliente"]."/";
 
     if (!file_exists($Ruta)){
         mkdir($Ruta, 0777, true);
