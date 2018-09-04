@@ -56,6 +56,7 @@
             $Contenido .= "canreinvite=no\n";
             $Contenido .= "disallow=all\n";
             $Contenido .= "allow=ulaw\n";
+            $Contenido .= "allow=gsm\n";
             $Contenido .= "insecure=port,invite\n";
             $Contenido .= "nat=yes\n";
             $Contenido .= "context=".$Contexto."\n";
