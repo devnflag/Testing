@@ -16,9 +16,7 @@
 
     if (!file_exists($Ruta)){
         mkdir($Ruta, 0777, true);
-    }
-    shell_exec("sudo chmod 777 /var/www/html/facturas/ -R");
-
+    }   
 
     $Comprobante = $ComprobantesClass->nuevoComprobante($_SESSION["idCliente"],$Ruta,$tipoComprobante);
     if($Comprobante["result"]){
