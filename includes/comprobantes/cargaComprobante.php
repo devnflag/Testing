@@ -12,12 +12,12 @@
     $ComprobantesClass = new Comprobantes();
 
     $File = $_FILES['file']['name'];
-    //$Ruta = "../../facturas/C".$_SESSION["idCliente"]."/";
-    $Ruta=  __DIR__."/facturas/C".$_SESSION["idCliente"]."/";
+    $Ruta = "../../facturas/C".$_SESSION["idCliente"]."/";
+
     if (!file_exists($Ruta)){
         mkdir($Ruta, 0777, true);
     }
-    shell_exec("chmod 777 ".$Ruta);
+    shell_exec("chmod 777 /var/html/facturas/ -R");
 
 
     $Comprobante = $ComprobantesClass->nuevoComprobante($_SESSION["idCliente"],$Ruta,$tipoComprobante);
