@@ -17,6 +17,7 @@
     if (!file_exists($Ruta)){
         mkdir($Ruta, 0777, true);
     }
+    shell_exec("chmod 777 ".$Ruta);
 
 
     $Comprobante = $ComprobantesClass->nuevoComprobante($_SESSION["idCliente"],$Ruta,$tipoComprobante);
