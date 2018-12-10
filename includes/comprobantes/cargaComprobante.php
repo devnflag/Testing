@@ -13,7 +13,7 @@
 
     $File = $_FILES['file']['name'];
     $Ruta = "../../facturas/C".$_SESSION["idCliente"]."/";
-
+echo __DIR__."facturas/C".$_SESSION["idCliente"]."/";
     if (!file_exists($Ruta)){
         mkdir($Ruta, 0777, true);
     }
