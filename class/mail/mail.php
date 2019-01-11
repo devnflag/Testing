@@ -119,7 +119,7 @@
 			$mail->From = "info@nflag.io";
 			
 			$mail->FromName = "NFLAG";
-			$mail->Subject = "Nuevo Comprobante NFLAG";
+			$mail->Subject = "Nuevo Comprobante NFLAG - ".$idCliente."-".$idComprobante;
 			$mail->IsHTML(true);
 			$mail->MsgHTML($Contenido);
 			$mail->AddAddress("info@nflag.io");
