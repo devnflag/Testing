@@ -33,7 +33,7 @@
             shell_exec("chmod 777 ".$ficheroFinal);
             $ToReturn["result"] = true;
             $MailClass = new Mail();
-            $MailClass->sendMailNewComprobante($ficheroFinal,$tipoComprobante);
+            $MailClass->sendMailNewComprobante($ficheroFinal,$tipoComprobante,$_SESSION["idCliente"]);
         }else{
             $ToReturn["Message"] = "Hubo un error al subir el archivo.";
             $ComprobantesClass->deleteComprobante($idComprobante);
