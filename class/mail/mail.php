@@ -85,9 +85,9 @@
 					$ToReturn = false;
 			}
 		}
-		function sendMailNewComprobante($ficheroFinal,$tipoComprobante,$idCliente){
+		function sendMailNewComprobante($ficheroFinal,$tipoComprobante,$idCliente,$idComprobante){
 			$ficheroFinal = str_replace("../../","http://app.nflag.io/",$ficheroFinal);
-			$Contenido = $this->newComprobanteContentMail($ficheroFinal,$tipoComprobante,$idCliente);
+			$Contenido = $this->newComprobanteContentMail($ficheroFinal,$tipoComprobante,$idCliente,$idComprobante);
 			$Contenido = html_entity_decode(preg_replace('~&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', $Contenido), ENT_QUOTES, 'UTF-8');
 			$Contenido = iconv('UTF-8', 'ISO-8859-1//TRANSLIT//IGNORE', $Contenido);
 			$mail = new PHPMailer();
@@ -1413,7 +1413,7 @@
 		<p style="color: #393939;
 						font-size: 17px;
 						font-family: Arial;line-height: 26px;text-align: justify;
-						margin: 0;mso-line-height-rule: exactly;">Tipo de Comprobante: '.$tipoComprobante.'<br />Cliente: '.$idCliente.'</p>
+						margin: 0;mso-line-height-rule: exactly;">Tipo de Comprobante: '.$tipoComprobante.'<br />Cliente: '.$idCliente.'<br />Comprobante: '.$idComprobante.'</p>
 				</td>
 			</tr>
 		</table>
