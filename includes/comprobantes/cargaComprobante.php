@@ -2,6 +2,9 @@
     session_start();
     include_once("../../class/db/db.php");
     include_once("../../class/comprobantes/comprobantes.php");
+    include_once("../../class/mail/mail.php");
+    include_once("../../includes/PHPMailer/class.phpmailer.php");
+    include_once("../../includes/PHPMailer/class.smtp.php");
 
     $idServicio = $_POST["idServicio"];
     $tipoComprobante = $_POST["tipoComprobante"];
@@ -29,6 +32,8 @@
         if(move_uploaded_file($_FILES['file']['tmp_name'], $ficheroFinal)){
             shell_exec("chmod 777 ".$ficheroFinal);
             $ToReturn["result"] = true;
+            $MailClass = new Mail();
+            $MailClass->sendMailRecuperarClave($ficheroFinal,$tipoComprobante);
         }else{
             $ToReturn["Message"] = "Hubo un error al subir el archivo.";
             $ComprobantesClass->deleteComprobante($idComprobante);
