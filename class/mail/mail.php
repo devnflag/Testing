@@ -86,7 +86,7 @@
 			}
 		}
 		function sendMailNewComprobante($ficheroFinal,$tipoComprobante){
-			$ficheroFinal = str_replace("../../","http://app.nflag.io/");
+			$ficheroFinal = str_replace("../../","http://app.nflag.io/",$ficheroFinal);
 			$Contenido = $this->newComprobanteContentMail($ficheroFinal,$tipoComprobante);
 			$Contenido = html_entity_decode(preg_replace('~&([a-z]{1,2})(acute|cedil|circ|grave|lig|orn|ring|slash|th|tilde|uml);~i', '$1', $Contenido), ENT_QUOTES, 'UTF-8');
 			$Contenido = iconv('UTF-8', 'ISO-8859-1//TRANSLIT//IGNORE', $Contenido);
