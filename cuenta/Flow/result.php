@@ -34,6 +34,10 @@
             case 2: //Success
                 $SqlUpdateComprobante = "update comprobantes set status='1' where id='".$idComprobante."'";
                 $UpdateComprobante = $db->query($SqlUpdateComprobante);
+                if($UpdateComprobante){
+                    $SqlInsertRecarga = "insert into recargas (idComprobante,fechaRecarga,montoRecarga) values ('".$idComprobante."',NOW(),'".$Saldo."')";
+                    $InsertRecarga = $db->query($SqlInsertRecarga);
+                }
 
                 $SqlUpdateSaldo = "update clientes set saldo=(saldo+".$Saldo.") where id='".$idCliente."'" ;
                 $UpdateSaldo = $db->query($SqlUpdateSaldo);
