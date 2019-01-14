@@ -3,7 +3,7 @@
      * Ejemplo de creación de una orden de cobro, iniciando una transacción de pago
      * Utiliza el método payment/create
      */
-    require("../class/Flow/FlowApi.class.php");
+    require("../../class/Flow/FlowApi.class.php");
     //Para datos opcionales campo "optional" prepara un arreglo JSON
     $optional = array(
         "rut" => "25858538-0",

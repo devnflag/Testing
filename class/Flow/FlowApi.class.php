@@ -9,7 +9,7 @@
      * @Last Modified by: Carlos Sepulveda
      * @Last Modified time: 28-04-2017 11:32
      */
-    require(__DIR__ . "/Config.class.php");
+    require("Config.class.php");
     class FlowApi {
         
         protected $apiKey;
