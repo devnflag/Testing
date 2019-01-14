@@ -14,7 +14,7 @@
         "APIKEY" => "3B7F58B2-3FF6-42FF-9D4D-9FD5CA1E6L58", // Registre aquí su apiKey
         "SECRETKEY" => "780d6e66a36f6af42f493ce1ee074fb3731a4154", // Registre aquí su secretKey
         "APIURL" => "https://sandbox.flow.cl/api", // Producción EndPoint o Sandbox EndPoint
-        "BASEURL" => "https://app.nflag.io/cuenta/Flow" //Registre aquí la URL base en su página donde instalará el cliente
+        "BASEURL" => "http://app.nflag.io/cuenta/Flow" //Registre aquí la URL base en su página donde instalará el cliente
     );
     
     class Config {
