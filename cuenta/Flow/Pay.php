@@ -40,10 +40,8 @@
         "urlReturn" => Config::get("BASEURL") ."/result.php",
         "optional" => $optional
     );
-    print_r($params);
     //Define el metodo a usar
     $serviceName = "payment/create";
-    die;
     try {
         // Instancia la clase FlowApi
         $flowApi = new FlowApi;
