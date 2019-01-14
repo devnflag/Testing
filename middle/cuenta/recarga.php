@@ -78,7 +78,22 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="flow" role="tabpanel">
-                                    <p>Muy pronto</p>
+                                    <div class="row" style="display: none;">
+                                        <div class="col-sm-4"></div>
+                                        <div class="card col-sm-4">
+                                            <div class="card-body">
+                                                <div class="form-group">
+                                                    <h6>Ingrese la cantidad de Pesos</h6>
+                                                    <input type="text" name="pesosChileFlow" class="form-control form-control-lg">
+                                                    <i class="form-group__bar"></i>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button class="btn btn-primary" name="pagarFlow" style="width: 100%;" >PAGAR</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4"></div>
+                                    </div>
                                 </div>
                                 <div class="tab-pane fade" id="paypal" role="tabpanel">
                                     <div class="row">

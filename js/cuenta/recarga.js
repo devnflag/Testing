@@ -147,8 +147,35 @@ $(document).ready(function(){
             });
         }
     });
+    $("input[name='pesosChileFlow']").on("input", function () { 
+        this.value = this.value.replace(/[^0-9]/g,'');
+    });
+    $("button[name='pagarFlow']").click(function(){
+        var Pesos = $("input[name='pesosChileFlow']").val();
+        if(Pesos == ""){
+            Pesos = 0;
+        }
+        if(Pesos > 0){
+            PagarFlow(Pesos);
+        }else{
+            swal({
+                title: '¡Error!',
+                text: 'Debe ingresar una cantidad de pesos a comprar.',
+                type: 'warning',
+                timer: 2000,
+                buttonsStyling: false,
+                showConfirmButton: false,
+                buttonsStyling: false,
+                confirmButtonClass: 'btn btn-sm btn-light',
+                background: 'rgba(0, 0, 0, 0.96)'
+            });
+        }
+    });
 
     function PagarPaypal(Pesos){
         window.location = "../cuenta/Paypal.php?saldo="+Pesos;
+    }
+    function PagarFlow(Pesos){
+        window.location = "../cuenta/Flow/Pay.php?saldo="+Pesos;
     }
 });

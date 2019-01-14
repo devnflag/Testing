@@ -28,7 +28,7 @@
         $SqlUpdateSaldo = "update clientes set saldo=(saldo+".$_GET["saldo"].") where id='".$_GET["idCliente"]."'" ;
         $UpdateSaldo = $db->query($SqlUpdateSaldo);
 
-        $SqlInsertComprobante = "insert into comprobantes (idCliente,tipoComprobante,fechaRegistro) values ('".$_GET["idCliente"]."','Paypal',NOW())";
+        $SqlInsertComprobante = "insert into comprobantes (idCliente,tipoComprobante,fechaRegistro,status) values ('".$_GET["idCliente"]."','Paypal',NOW(),'1')";
         $InsertComprobante = $db->query($SqlInsertComprobante);
         if($InsertComprobante){
             $idComprobante = $db->getLastID();

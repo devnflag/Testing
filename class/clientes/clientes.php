@@ -35,6 +35,18 @@
             }
             return $ToReturn;
         }
+        function getClienteByID($idCliente){
+            $db = new DB();
+            $ToReturn = array();
+            $ToReturn["result"] = false;
+            $SqlCliente = "select * from clientes where id='".$idCliente."'";
+            $Cliente = $db->select($SqlCliente);
+            if(count($Cliente) > 0){
+                $ToReturn["Data"] = $Cliente[0];
+                $ToReturn["result"] = true;
+            }
+            return $ToReturn;
+        }
         function getClienteByUsuario($idUsuario){
             $db = new DB();
             $ToReturn = array();
