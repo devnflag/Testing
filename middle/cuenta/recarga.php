@@ -17,7 +17,7 @@
                                     <a class="nav-link active" data-toggle="tab" href="#depositotransferencia" role="tab" aria-expanded="false">Deposito ó Transferencia</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#webpay" role="tab" aria-expanded="false">Webpay</a>
+                                    <a class="nav-link" data-toggle="tab" href="#flow" role="tab" aria-expanded="false">Flow</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#paypal" role="tab" aria-expanded="false">Paypal</a>
@@ -77,7 +77,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="webpay" role="tabpanel">
+                                <div class="tab-pane fade" id="flow" role="tabpanel">
                                     <p>Muy pronto</p>
                                 </div>
                                 <div class="tab-pane fade" id="paypal" role="tabpanel">
