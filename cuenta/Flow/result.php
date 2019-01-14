@@ -26,12 +26,18 @@
         $Status = $response["status"];
         $idComprobante = $response["commerceOrder"];
         $Saldo = $response["amount"];
+        $Optional = $response["optional"];
+        $idCliente = $Optional["idCliente"];
         switch($Status){
             case 1: //Pending
             break;
             case 2: //Success
                 $SqlUpdateComprobante = "update comprobantes set status='1' where id='".$idComprobante."'";
-                $InsertComprobante = $db->query($SqlInsertComprobante);
+                $UpdateComprobante = $db->query($SqlUpdateComprobante);
+
+                $SqlUpdateSaldo = "update clientes set saldo=(saldo+".$Saldo.") where id='".$idCliente."'" ;
+                $UpdateSaldo = $db->query($SqlUpdateSaldo);
+
             break;
             case 3: //Declined
                 $SqlUpdateComprobante = "update comprobantes set status='3' where id='".$idComprobante."'";
