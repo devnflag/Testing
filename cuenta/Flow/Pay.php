@@ -18,8 +18,8 @@
         "amount" => 5000,
         "email" => "jonathanurbina92@gmail.com",
         "paymentMethod" => 9,
-        "urlConfirmation" => Config::get("BASEURL") . "/Flow/confirm.php",
-        "urlReturn" => Config::get("BASEURL") ."/Flow/result.php",
+        "urlConfirmation" => Config::get("BASEURL") . "/confirm.php",
+        "urlReturn" => Config::get("BASEURL") ."/result.php",
         "optional" => $optional
     );
     //Define el metodo a usar
