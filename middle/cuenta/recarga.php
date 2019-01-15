@@ -78,7 +78,7 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="flow" role="tabpanel">
-                                    <div class="row" style="display: none;">
+                                    <div class="row">
                                         <div class="col-sm-4"></div>
                                         <div class="card col-sm-4">
                                             <div class="card-body">
