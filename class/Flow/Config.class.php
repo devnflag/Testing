@@ -13,7 +13,7 @@
     $COMMERCE_CONFIG = array(
         "APIKEY" => "327FEEE2-8842-45EA-A594-3FEL107C4C3C", // Registre aquí su apiKey
         "SECRETKEY" => "26574b539dc354ddebc9ef8b9fd2aaac05b8b7cc", // Registre aquí su secretKey
-        "APIURL" => "https://sandbox.flow.cl/api", // Producción EndPoint o Sandbox EndPoint
+        "APIURL" => "https://flow.cl/api", // Producción EndPoint o Sandbox EndPoint
         "BASEURL" => "http://app.nflag.io/cuenta/Flow" //Registre aquí la URL base en su página donde instalará el cliente
     );
     
