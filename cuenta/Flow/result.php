@@ -24,10 +24,15 @@
         $response = $flowApi->send($serviceName, $params, "GET");
         
         $Status = $response["status"];
+        $FlowOrder = $response["flowOrder"];
         $idComprobante = $response["commerceOrder"];
         $Saldo = $response["amount"];
         $Optional = $response["optional"];
         $idCliente = $Optional["idCliente"];
+
+        $SqlUpdateComprobante = "update comprobantes set idExterno='".$FlowOrder."' where id='".$idComprobante."'";
+        $UpdateComprobante = $db->query($SqlUpdateComprobante);
+
         switch($Status){
             case 1: //Pending
             break;
