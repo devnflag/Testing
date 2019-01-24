@@ -14,10 +14,10 @@
                         <div class="tab-container">
                             <ul class="nav nav-tabs nav-fill" role="tablist">
                                 <li class="nav-item">
-                                    <a class="nav-link active" data-toggle="tab" href="#depositotransferencia" role="tab" aria-expanded="false">Deposito ó Transferencia</a>
+                                    <a class="nav-link active" data-toggle="tab" href="#flow" role="tab" aria-expanded="false">Flow (Débito o Crédito)</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#flow" role="tab" aria-expanded="false">Flow</a>
+                                    <a class="nav-link" data-toggle="tab" href="#depositotransferencia" role="tab" aria-expanded="false">Deposito ó Transferencia</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" data-toggle="tab" href="#paypal" role="tab" aria-expanded="false">Paypal</a>
@@ -25,7 +25,7 @@
                             </ul>
 
                             <div class="tab-content">
-                                <div class="tab-pane fade active show" id="depositotransferencia" role="tabpanel" aria-expanded="true">
+                                <div class="tab-pane fade" id="depositotransferencia" role="tabpanel" >
                                     <p>Debe hacer el deposito o transferencia a la siguiente cuenta:</p>
                                     <table class="table table-bordered invoice__table">
                                         <tbody>
@@ -77,7 +77,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="tab-pane fade" id="flow" role="tabpanel">
+                                <div class="tab-pane fade active show" id="flow" role="tabpanel" aria-expanded="true">
                                     <div class="row">
                                         <div class="col-sm-4"></div>
                                         <div class="card col-sm-4">
